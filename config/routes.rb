@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :surveys
   resources :polls
-  resources :polls
+  get 'polls/:id/results', to: 'polls#results'
   devise_for :users
   root to: 'home#index'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519024843) do
+ActiveRecord::Schema.define(version: 20160522171547) do
 
   create_table "poll_surveys", force: :cascade do |t|
     t.integer  "poll_id"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20160519024843) do
 
   create_table "polls", force: :cascade do |t|
     t.string   "question"
+    t.integer  "user_id"
     t.boolean  "limit_to_survey", default: false
     t.boolean  "select_multiple", default: false
+    t.boolean  "public_results",  default: true
     t.boolean  "open",            default: true
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -31,23 +33,15 @@ ActiveRecord::Schema.define(version: 20160519024843) do
 
   create_table "responses", force: :cascade do |t|
     t.string   "text"
-    t.integer  "selected"
+    t.integer  "selected",   default: 0
     t.integer  "poll_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "surveys", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer  "user_id"
-  end
-
-  create_table "user_polls", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "poll_id"
-    t.boolean  "owner"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,5 +64,13 @@ ActiveRecord::Schema.define(version: 20160519024843) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "response_id"
+    t.boolean  "public_response", default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
 end

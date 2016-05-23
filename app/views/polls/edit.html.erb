@@ -1,0 +1,11 @@
+<h1>Edit your Poll Options</h1>
+
+
+
+<%= form_for @poll do |f| %>
+
+<%= render partial: "poll_options", locals: {form: f} %>
+
+  <%=f.submit "Edit Poll Options" %>
+  
+<% end %>

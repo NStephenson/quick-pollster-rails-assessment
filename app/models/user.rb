@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :user_polls
-  has_many :polls, through: :user_polls
+  has_many :polls
+  has_many :votes
+  has_many :responses, through: :votes
   has_many :surveys
+  
+
 end
