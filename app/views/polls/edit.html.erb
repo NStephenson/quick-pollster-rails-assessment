@@ -9,3 +9,7 @@
   <%=f.submit "Edit Poll Options" %>
   
 <% end %>
+
+<%= link_to "Delete this poll", "/polls/#{@poll.id}", method: 'DELETE' %>
+
+

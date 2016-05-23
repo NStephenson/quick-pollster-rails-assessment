@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :responses, through: :votes
   has_many :surveys
+
+
+  def polls_responded
+    responses.map { |response| response.poll }.uniq
+  end
   
 
 end

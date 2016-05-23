@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
 
+  root to: 'home#index'
+
+  devise_for :users
   resources :surveys
   resources :polls
-  get 'polls/:id/results', to: 'polls#results'
-  devise_for :users
-  root to: 'home#index'
+
+  get 'polls/:id/results', to: 'polls#results', as: 'results'
+  post 'polls/:id/results', to: 'polls#add_results', as: "add_results"
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
