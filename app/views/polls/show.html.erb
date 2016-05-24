@@ -1,9 +1,1 @@
-<h1><%= @poll.question%></h1>
-
-<form method="POST" action="/polls/<%= @poll.id %>/results">
-  <% @poll.responses.each do |response| %>
-    <input type="<%= @poll.select_multiple ? 'checkbox' : 'radio' %>" name="response[]" value="<%= response.id %>"><label><%= response.text %></label><br>
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-  <% end %>
-    <input type="submit" name="submit">
-</form>
+<%= render partial: "poll", locals: {poll: @poll, survey: false} %>

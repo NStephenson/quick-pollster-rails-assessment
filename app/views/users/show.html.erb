@@ -1,0 +1,13 @@
+<h1> Welcome to <%= @user.id %>'s page</h1>
+
+<h2>Published Polls</h2>
+
+<% @user.polls.published_polls.each do |poll| %>
+  <%= render partial: "polls/poll", locals: {poll: poll, survey: false} %>
+<% end %>
+
+<h2>Public Votes</h2>
+<% @user.votes.public_votes.each do |vote| %>
+  <%= vote.response.poll.question %>
+  <%= @user.id %> chose <%= vote.response.text %>
+<% end %>

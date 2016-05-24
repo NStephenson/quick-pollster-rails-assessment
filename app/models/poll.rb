@@ -12,5 +12,10 @@ class Poll < ActiveRecord::Base
   validates :question, presence: true
   validates :responses, length: {in: 2..6}
 
+
+  def self.published_polls
+    all.select { |poll| poll.published }
+  end
+
   
 end

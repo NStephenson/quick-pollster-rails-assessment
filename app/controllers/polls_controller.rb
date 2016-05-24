@@ -1,9 +1,13 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
+  def index
+    @polls = Poll.published_polls
+  end
+
   def show
     @poll = Poll.find(params[:id])
-    redirect_to results_path(@poll) if current_user.polls_responded.include?(@poll)
+    redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
     redirect_to survey_path(@poll.survey) if @poll.limit_to_survey 
   end
 
@@ -49,9 +53,9 @@ class PollsController < ApplicationController
 
   def add_results
     @poll = Poll.find(params[:id])
-    params.require('response').each do |response_id|
+    params.require('response')[params[:id]].each do |response_id|
       response = Response.find(response_id.to_i)
-      if response.poll == @poll
+      if response.poll == @poll #put this logic in a validate response method?
         response.selected += 1
         response.save
         if signed_in? 
@@ -62,7 +66,7 @@ class PollsController < ApplicationController
         end 
       end
     end
-    redirect_to results_path(@poll)
+    redirect_to poll_results_path(@poll)
   end
 
   def destroy
@@ -75,10 +79,10 @@ class PollsController < ApplicationController
 
   private
   def new_poll_params
-    params.require(:poll).permit(:question, :limit_to_survey, :select_multiple, :open, :public_results, responses_attributes: [:id, :text])
+    params.require(:poll).permit(:question, :limit_to_survey, :select_multiple, :open, :public_results, :published, responses_attributes: [:id, :text])
   end
 
   def edit_poll_params
-    params.require(:poll).permit(:limit_to_survey, :select_multiple, :open, :public_results)
+    params.require(:poll).permit(:limit_to_survey, :select_multiple, :open, :public_results, :published)
   end
 end

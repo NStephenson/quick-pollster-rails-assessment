@@ -1,7 +1,1 @@
-<h1><%= @poll.question%></h1>
-
-<ul>
-<% @poll.responses. each do |response| %>
-  <li><%= response.text %>: <%= response.selected %> votes</li>
-<% end %>
-</ul>
+<%= render partial: "poll_results", locals: {poll: @poll} %>
