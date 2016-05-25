@@ -1,5 +1,9 @@
-<h1>Feel Free to take these Public Polls:</h1>
+<h1>Published Polls</h1>
 
 <% @polls.each do |poll| %>
-  <%= render partial: "poll", locals: {poll: poll, survey: false} %>
+    <% if responded_to?(poll) %>
+      <%= render partial: "poll_results", locals: {poll: poll} %>
+    <% else %>
+      <%= render partial: "poll", locals: {poll: poll, survey: false} %>
+    <% end %>
 <% end %>

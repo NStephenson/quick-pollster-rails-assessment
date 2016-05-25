@@ -1,18 +1,34 @@
 class PollsController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [ :index, :edit, :update, :destroy ]
+  before_action :find_poll, only: [:results, :edit, :update, :add_results, :destroy]
 
   def index
-    @polls = Poll.published_polls
+    if params[:user_id]
+      @polls = User.find(params[:user_id]).polls.published_polls
+    else
+      @polls = Poll.published_polls
+    end
   end
 
   def show
-    @poll = Poll.find(params[:id])
-    redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
-    redirect_to survey_path(@poll.survey) if @poll.limit_to_survey 
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+      @poll = @user.polls.find_by(id: params[:id])
+      if @poll.nil?
+        redirect_to user_polls_path(@user), alert: "Poll not found"
+      end
+    else
+      @poll = Poll.find(params[:id])
+    end
+
+    if signed_in?
+      redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
+    end
+
+    # redirect_to survey_path(@poll.survey) if @poll.limit_to_survey 
   end
 
   def results
-    @poll = Poll.find(params[:id])
   end
 
   def new
@@ -35,24 +51,23 @@ class PollsController < ApplicationController
   end
 
   def edit
-    @poll = Poll.find(params[:id])
     if current_user != @poll.user 
       redirect_to poll_path(@poll)
     end
   end
 
   def update
-    @poll.update(poll_params)
+    @poll.update(edit_poll_params)
     if @poll.save
       flash[:notice] = "Poll options updated!"
       redirect_to poll_path(@poll)
+    else
+      flash[:error] = "Somehow, you managed to fuck up. Congrats."
+      render action: 'edit'
     end
-    flash[:error] = "Somehow, you managed to fuck up. Congrats."
-    render action: 'edit'
   end
 
   def add_results
-    @poll = Poll.find(params[:id])
     params.require('response')[params[:id]].each do |response_id|
       response = Response.find(response_id.to_i)
       if response.poll == @poll #put this logic in a validate response method?
@@ -61,8 +76,8 @@ class PollsController < ApplicationController
         if signed_in? 
           current_user.responses << response 
         else
-          cookies[:polls_responded] = []
-          cookies[:polls_responded] << @poll.id #need working code to stop users not signed in from casting multiple votes
+          #cookies[:polls_responded] = []
+          #cookies[:polls_responded] << @poll.id #need working code to stop users not signed in from casting multiple votes
         end 
       end
     end
@@ -70,7 +85,7 @@ class PollsController < ApplicationController
   end
 
   def destroy
-    @poll = Poll.find(params[:id])
+    @poll.votes.each { |vote| vote.delete }
     @poll.responses.each { |response| response.delete }
     @poll.delete
     redirect_to root_path
@@ -84,5 +99,9 @@ class PollsController < ApplicationController
 
   def edit_poll_params
     params.require(:poll).permit(:limit_to_survey, :select_multiple, :open, :public_results, :published)
+  end
+
+  def find_poll
+    @poll = Poll.find(params[:id])
   end
 end

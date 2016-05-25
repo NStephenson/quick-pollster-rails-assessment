@@ -1,7 +1,20 @@
 <h1><%= poll.question%></h1>
 
-<ul>
-<% poll.responses. each do |response| %>
-  <li><%= response.text %>: <%= response.selected %> votes</li>
+  <% if poll.user && poll.user == current_user %>
+    <h5> <%= link_to 'Edit Poll Options', edit_poll_path(poll) %> - <%= link_to 'Delete this Poll', poll_path(poll), method: 'DELETE' %> - Share link: <%= poll_url(poll)%></h5>
+  <% elsif poll.user && poll.user != current_user %>
+    <h5>by <%= link_to poll.user.username, user_path(poll.user) %></h5>
+  <% else %>
+    <h5>By whoever sent you this link, most likely.</h5>
+  <% end %>
+
+<% if poll.public_results || current_user == poll.user %>
+  <ul>
+  <% poll.responses. each do |response| %>
+    <li><%= response.text %>: <%= response.selected %> votes</li>
+  <% end %>
+  </ul>
+  <p>Total votes: <%= poll.vote_total %></p>
+<% else %>
+  <p>The results to this poll have been made private by the owner </p>
 <% end %>
-</ul>

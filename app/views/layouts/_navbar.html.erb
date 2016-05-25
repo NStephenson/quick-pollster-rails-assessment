@@ -1,0 +1,11 @@
+<% if signed_in? %>
+  <ul>
+    <li>Welcome <%= link_to current_user.username, user_path(current_user) %>!</li>
+    <li><%= link_to 'Create A Poll', new_poll_path %></li>
+    <li><%= link_to 'Public Polls', polls_path %></li>
+    <li><%= link_to 'Your Polls', user_polls_path(current_user) %></li>
+    <%# <li>Published Surveys</li>
+    <li>Your Surveys</li> %>
+    <li><%= link_to "Sign Out", destroy_user_session_path, method: 'DELETE' %></li>
+  </ul>
+<% end %>

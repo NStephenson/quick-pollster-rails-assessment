@@ -14,7 +14,15 @@ class Poll < ActiveRecord::Base
 
 
   def self.published_polls
-    all.select { |poll| poll.published }
+    where(published: true)
+  end
+
+  def vote_total
+    total = 0
+    responses.each do |response|
+      total += response.selected
+    end
+    total
   end
 
   

@@ -5,7 +5,7 @@ class Vote < ActiveRecord::Base
   has_one :poll, through: :response
 
   def self.public_votes
-    all.select { |vote| vote.public_response }
+    where(public_response: true)
   end
   
 end

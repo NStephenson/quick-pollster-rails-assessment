@@ -1,12 +1,22 @@
-<h1><%= poll.question%></h1>
-<% if !survey %>
-<form method="POST" action="<%= poll_add_results_path(poll)%>">
-<% end %>
-  <% poll.responses.each do |response| %>
-    <input type="<%= poll.select_multiple ? 'checkbox' : 'radio' %>" name="response[<%= poll.id %>][]" value="<%= response.id %>"><label><%= response.text %></label><br>
-    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+<% if poll.open %>
+  <h2><%= poll.question%></h2>
+  <% if poll.user && poll.user == current_user %>
+    <h5> <%= link_to 'Edit Poll Options', edit_poll_path(poll) %> - <%= link_to 'Delete this Poll', poll_path(poll), method: 'DELETE' %> - Share link: <%= poll_url(poll)%></h5>
+  <% elsif poll.user && poll.user != current_user %>
+    <h5>by <%= link_to poll.user.username, user_path(poll.user) %></h5>
+  <% else %>
+    <h5>By whoever sent you this link, most likely.</h5>
   <% end %>
-<% if !survey %>
-    <input type="submit" name="submit">
-</form>
+
+  <form method="POST" action="<%= poll_add_results_path(poll)%>">
+    <% poll.responses.each do |response| %>
+      <input type="<%= poll.select_multiple ? 'checkbox' : 'radio' %>" name="response[<%= poll.id %>][]" value="<%= response.id %>"><label><%= response.text %></label><br>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <% end %>
+      <input type="submit" name="submit">
+  </form>
+
+<% else %>
+  <%= render partial: 'polls/poll_results', locals: { poll: poll } %>
+  <p>Poll closed! No vote for you!</p>
 <% end %>

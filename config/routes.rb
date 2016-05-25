@@ -2,10 +2,16 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # resources :surveys
+  resources :users, only: [:show] do
+    resources :polls, only: [ :index, :show ]
+  end
+
   resources :polls
-  resources :users, only: [:show]
+
+
+
 
   get 'polls/:id/results', to: 'polls#results', as: 'poll_results'
   post 'polls/:id/results', to: 'polls#add_results', as: "poll_add_results"
