@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
   <title>QuickPollster</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -12,6 +12,11 @@
   <div id="notice">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+  </div>
+
+  <div>
+    <a href="" ui-sref="polls" ui-sref-active="active">Go to the docs!</a>
+    <ui-view></ui-view>
   </div>
 
 <%= yield %>

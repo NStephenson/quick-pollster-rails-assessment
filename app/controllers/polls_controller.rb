@@ -1,12 +1,20 @@
 class PollsController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :edit, :update, :destroy ]
-  before_action :find_poll, only: [:results, :edit, :update, :add_results, :destroy]
+  before_action :find_poll, only: [ :edit, :update, :add_results, :destroy]
 
   def index
     if params[:user_id]
       @polls = User.find(params[:user_id]).polls.published_polls
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @polls}
+      end
     else
       @polls = Poll.published_polls
+      respond_to do |format|
+        format.html {render :index}
+        format.json {render json: @polls}
+      end
     end
   end
 
@@ -29,6 +37,11 @@ class PollsController < ApplicationController
   end
 
   def results
+    @poll = Poll.find(params[:id])
+    respond_to do |format|
+      format.html {render :results}
+      format.json {render json: @poll}
+    end 
   end
 
   def new
@@ -41,12 +54,12 @@ class PollsController < ApplicationController
     @poll.user = current_user if signed_in?
     if @poll.save
       flash[:notice] = "New poll successfully created!"
-      redirect_to poll_path(@poll)
+      render json: @poll, status: 201
     else
-      number = 6 - @poll.responses.length
-      number.times { @poll.responses.build }
-      flash[:error] = "Data invalid."
-      render action: 'new'
+      # number = 6 - @poll.responses.length
+      # number.times { @poll.responses.build }
+      # flash[:error] = "Data invalid."
+      # render action: 'new'
     end
   end
 
@@ -81,7 +94,7 @@ class PollsController < ApplicationController
         end 
       end
     end
-    redirect_to poll_results_path(@poll)
+    render json: @poll
   end
 
   def destroy

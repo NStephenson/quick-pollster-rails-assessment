@@ -27,7 +27,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'faker'
-
+gem 'active_model_serializers'
+gem 'sprockets', '2.12.3'
+gem 'angular-rails-templates'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

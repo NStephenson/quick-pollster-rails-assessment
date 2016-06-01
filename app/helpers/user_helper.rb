@@ -1,11 +1,11 @@
 module UserHelper
 
-  def you_or_user(user)
-    if user == current_user
-      "You"
-    else
-      user.username
-    end
+  def is_my_poll?(poll)
+    poll.user && poll.user == current_user
+  end
+
+  def not_my_poll?(poll)
+    poll.user && poll.user == current_user
   end
 
 end

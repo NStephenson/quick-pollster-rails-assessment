@@ -12,5 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+
+//= angular
+//= app
+
+//= require angular-rails-templates
+
+// Templates in app/assets/javascripts/app/templates
+//= require_tree ./templates
+
+//= PollsController
+//= ui-router
+
+
 //= require_tree .
+
