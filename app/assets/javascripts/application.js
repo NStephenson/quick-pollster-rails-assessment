@@ -13,17 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 
-//= angular
-//= app
+//= require angular
+//= require ui-router
+//= require ./app/app
 
 //= require angular-rails-templates
 
 // Templates in app/assets/javascripts/app/templates
-//= require_tree ./templates
-
-//= PollsController
-//= ui-router
-
+//= require_tree ./app/templates
+//= require_tree ./app/controllers
+//= require_tree ./app/directives
+//= require_tree ./app/services
 
 //= require_tree .
 

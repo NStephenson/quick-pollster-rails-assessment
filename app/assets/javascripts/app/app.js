@@ -4,12 +4,12 @@ angular
     $stateProvider
     .state('polls', {
       url: '/polls',
-      templateUrl: 'views/polls/index.html',
-      controller: 'PollsController as polls',
+      controller: 'PollsController as ctrl',
+      templateUrl: 'app/templates/polls-index.html',
       resolve: {
         polls: function(PollsService){
           return PollsService.getPolls
         }
       }
-    })
-  })]
+    });
+  });

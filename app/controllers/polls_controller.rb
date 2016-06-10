@@ -6,13 +6,11 @@ class PollsController < ApplicationController
     if params[:user_id]
       @polls = User.find(params[:user_id]).polls.published_polls
       respond_to do |format|
-        format.html {render :index}
         format.json {render json: @polls}
       end
     else
       @polls = Poll.published_polls
       respond_to do |format|
-        format.html {render :index}
         format.json {render json: @polls}
       end
     end
