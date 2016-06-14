@@ -1,4 +1,12 @@
 <div>
   <h1>Published Polls</h1>
-  
+
+  <div ng-repeat="poll in ctrl.polls track by poll.id">
+    <h2>{{poll.question}}</h2>
+    <!-- if the poll has a user -->
+    <p> by {{poll.user.username}}</p>
+    <ul ng-repeat="response in poll.responses">
+      <li>{{response.text}} - {{response.selected}}
+    </ul>
+  </div>
 </div>

@@ -18,6 +18,7 @@
 //= require ./app/app
 
 //= require angular-rails-templates
+//= require angular-devise
 
 // Templates in app/assets/javascripts/app/templates
 //= require_tree ./app/templates

@@ -1,4 +1,8 @@
-function PollsController(){
+function PollsController(polls){
+
+
+  this.polls = polls.data;
+
 
 }
 

@@ -1,5 +1,5 @@
 angular
-  .module('app', ['ui.router', 'templates'])
+  .module('app', ['ui.router', 'templates', 'Devise'])
   .config(function($stateProvider){
     $stateProvider
     .state('polls', {
@@ -8,7 +8,7 @@ angular
       templateUrl: 'app/templates/polls-index.html',
       resolve: {
         polls: function(PollsService){
-          return PollsService.getPolls
+          return PollsService.getPolls()
         }
       }
     });
