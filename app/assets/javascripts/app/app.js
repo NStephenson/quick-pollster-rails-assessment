@@ -11,5 +11,15 @@ angular
           return PollsService.getPolls()
         }
       }
+    })
+    .state('user', {
+      url: '/user/{id}',
+      controller: 'UserController as ctrl',
+      templateUrl: 'app/templates/user.html',
+      resolve: {
+        polls: function(UserService){
+          return UserService.getUser()
+        }
+      }
     });
   });
