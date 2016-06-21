@@ -14,17 +14,10 @@
 //= require jquery_ujs
 
 //= require angular
-//= require ui-router
-//= require ./app/app
+//= require angular-ui-router
 
 //= require angular-rails-templates
-//= require angular-devise
-
-// Templates in app/assets/javascripts/app/templates
-//= require_tree ./app/templates
-//= require_tree ./app/controllers
-//= require_tree ./app/directives
-//= require_tree ./app/services
+//= require AngularDevise
 
 //= require_tree .
 

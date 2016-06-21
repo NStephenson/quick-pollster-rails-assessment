@@ -2,10 +2,15 @@
   <h2>{{poll.question}}</h2>
   <p> by {{poll.user.username}}</p>
   <div ng-repeat="response in poll.responses" ng-switch on="poll.select_multiple">
-    <input ng-switch-when="true" type="checkbox" name="{{response.text}}" ng-model="poll.options" ng-change="addSelection(response)" value="{{response.text}}">
-    <input ng-switch-when="false" type="radio" name="{{response.text}}" ng-change="addSelection(response)" value="{{response.text}}"> 
+
+    <input ng-switch-when="true" type="checkbox" name="{{respose.text}}" value="{{response.text}}" ng-model="$parent.$parent.response.id[response.id]" >
+
+    <input ng-switch-when="false" type="radio" name="responses" value="{{response.id}}" ng-model="$parent.$parent.response.id"> 
     {{response.text}} - {{response.selected}} {{poll.options}}
   </div> 
   <input type="submit" id="submit" value="Submit" />
   
 </form>
+{{response}}
+
+
