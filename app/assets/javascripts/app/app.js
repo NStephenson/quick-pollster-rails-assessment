@@ -27,11 +27,16 @@ angular
         }
       }
     })
+    .state('login',{
+      url: '/login',
+      controller: 'AuthController',
+      templateUrl: 'app/templates/auth/login.html'
+    })
     .state('newPoll', {
       url: '/polls/new',
       controller: function($scope, PollsService){
-        $scope.createNewPoll = function(poll){
-          return PollsService.newPoll(poll);
+        $scope.createNewPoll = function(){
+          console.log(PollsService.newPoll($scope.poll));
         }
       },
       templateUrl: 'app/templates/new_poll.html'
