@@ -1,4 +1,4 @@
-<form ng-submit="submitResponse(poll)">
+<form ng-submit="submitResponse(poll.id, response)">
   <h2>{{poll.question}}</h2>
   <p> by {{poll.user.username}}</p>
   <div ng-repeat="response in poll.responses" ng-switch on="poll.select_multiple">

@@ -4,8 +4,16 @@ function PollsService($http){
     return $http.get('/polls.json');
   } 
 
-  this.submitResults = function(poll){
-    $http.post('/add_results', poll);
+  this.newPoll = function(poll){
+    return $http.post('/polls.json');
+  } 
+
+  this.getPoll = function(id){
+    return $http.get('/polls/' + id + '.json');
+  } 
+
+  this.submitResults = function(id, response){
+    $http.post('/polls/' + id + '/results.json', response);
   }
 
 }

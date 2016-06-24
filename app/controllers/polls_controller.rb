@@ -25,13 +25,14 @@ class PollsController < ApplicationController
       end
     else
       @poll = Poll.find(params[:id])
+      respond_to do |format|
+        format.json {render json: @poll}
+      end
     end
 
     if signed_in?
       redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
-    end
-
-    # redirect_to survey_path(@poll.survey) if @poll.limit_to_survey 
+    end 
   end
 
   def results
@@ -42,23 +43,19 @@ class PollsController < ApplicationController
     end 
   end
 
-  def new
-    @poll = Poll.new
-    6.times { @poll.responses.build }
-  end
+  # def new
+  #   @poll = Poll.new
+  #   6.times { @poll.responses.build }
+  # end
 
   def create
-    @poll = Poll.new(new_poll_params)
-    @poll.user = current_user if signed_in?
-    if @poll.save
-      flash[:notice] = "New poll successfully created!"
-      render json: @poll, status: 201
-    else
-      # number = 6 - @poll.responses.length
-      # number.times { @poll.responses.build }
-      # flash[:error] = "Data invalid."
-      # render action: 'new'
-    end
+    # @poll = Poll.new(new_poll_params)
+    # @poll.user = current_user if signed_in?
+    # if @poll.save
+    #   flash[:notice] = "New poll successfully created!"
+    #   render json: @poll, status: 201
+    # end
+    new_poll_params
   end
 
   def edit
@@ -105,7 +102,7 @@ class PollsController < ApplicationController
 
   private
   def new_poll_params
-    params.require(:poll).permit(:question, :limit_to_survey, :select_multiple, :open, :public_results, :published, responses_attributes: [:id, :text])
+    params.require(:poll).permit(:question, :limit_to_survey, :select_multiple, :open, :public_results, :published, responses_attributes: [:text])
   end
 
   def edit_poll_params

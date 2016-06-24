@@ -5,9 +5,9 @@ function QpPoll(){
     scope: {
       poll: '='
     },
-    controller: function($scope){
-      $scope.submitResponse = function(poll){
-        debugger;
+    controller: function($scope, PollsService){
+      $scope.submitResponse = function(id, response){
+        PollsService.submitResults(id, response);
       }
       $scope.addSelection = function(response) {
 

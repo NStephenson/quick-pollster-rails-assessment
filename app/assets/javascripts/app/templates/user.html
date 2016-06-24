@@ -1,9 +1,8 @@
-<h1> Welcome to {{user.username}}'s page</h1>
+<h1> Welcome to {{ctrl.user.username}}'s page</h1>
 
   <h2>Published Polls</h2>
-  <div ng-repeat="polls in user.polls track by poll.id">
+  <div ng-repeat="poll in ctrl.user.polls track by poll.id">
     <qp-poll poll="poll"></qp-poll>
   </div>
 
-  <h2>Public Votes</h2>
-    
+<h2>Public Votes</h2>

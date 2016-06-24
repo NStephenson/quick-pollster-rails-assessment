@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :polls, only: [ :index, :show ]
   end
 
-  resources :polls
+  resources :polls, only: [:create, :show, :update, :destroy]
 
 
 
@@ -18,7 +18,4 @@ Rails.application.routes.draw do
 
   # get 'surveys/:id/results', to: 'surveys#results', as: 'survey_results'
   # post 'surveys/:id/results', to: 'surveys#add_results', as: "survey_add_results"
-
-
-
 end
