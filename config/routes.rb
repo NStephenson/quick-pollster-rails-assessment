@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :polls, only: [ :index, :show ]
   end
 
-  resources :polls, only: [:create, :show, :update, :destroy]
+  resources :polls, only: [:index, :create, :show, :update, :destroy]
 
 
 

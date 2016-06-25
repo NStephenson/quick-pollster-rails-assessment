@@ -32,11 +32,17 @@ angular
       controller: 'AuthController',
       templateUrl: 'app/templates/auth/login.html'
     })
+    .state('signUp',{
+      url: '/signup',
+      controller: 'AuthController',
+      templateUrl: 'app/templates/auth/registration.html'
+    })
     .state('newPoll', {
       url: '/polls/new',
-      controller: function($scope, PollsService){
+      controller: function($scope, PollsService, Auth){
         $scope.createNewPoll = function(){
-          console.log(PollsService.newPoll($scope.poll));
+          console.log(Auth.currentUser());
+          console.log(Auth._currentUser);
         }
       },
       templateUrl: 'app/templates/new_poll.html'

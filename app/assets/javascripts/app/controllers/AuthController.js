@@ -1,14 +1,17 @@
 function AuthController($scope, $state, Auth){
   
   $scope.login = function(){
-    Auth.login($scope.user);
-  };
+    Auth.login($scope.creds);
+  }
 
-  $scope.register = function(){
-    Auth.register($scope.user).then(function(){
-      $state.go('manila.user');
+  $scope.signUp = function(){
+    console.log($scope.creds);
+    Auth.register($scope.creds).then(function(user){
+      console.log(user);
+    }, function(error){
+      console.log(error);
     });
-  };
+  }
 }
 
 angular
