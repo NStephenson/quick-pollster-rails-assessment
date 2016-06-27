@@ -5,7 +5,8 @@ function PollsService($http){
   } 
 
   this.newPoll = function(poll){
-    return $http.post('/polls.json');
+    console.log(poll);
+    return $http.post('/polls.json', poll);
   } 
 
   this.getPoll = function(id){

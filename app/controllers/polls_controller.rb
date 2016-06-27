@@ -49,13 +49,16 @@ class PollsController < ApplicationController
   # end
 
   def create
-    render body: params
-    # @poll = Poll.new(new_poll_params)
-    # @poll.user = current_user if signed_in?
-    # if @poll.save
-    #   flash[:notice] = "New poll successfully created!"
-    #   render json: @poll, status: 201
-    # end
+    puts "hello!!!!"
+    puts new_poll_params
+    @poll = Poll.new(new_poll_params)
+    @poll.user = current_user if signed_in?
+    if @poll.save
+      flash[:notice] = "New poll successfully created!"
+      render json: @poll, status: 201
+    else
+      render body: "error"
+    end
   end
 
   def edit

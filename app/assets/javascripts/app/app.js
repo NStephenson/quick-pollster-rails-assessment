@@ -39,10 +39,12 @@ angular
     })
     .state('newPoll', {
       url: '/polls/new',
-      controller: function($scope, PollsService, Auth){
+      controller: function($scope, PollsService){
+        $scope.newPoll = {};
+        $scope.newPoll.poll = {};
+        $scope.newPoll.poll.responses_attributes = [ { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' } ];
         $scope.createNewPoll = function(){
-          console.log(Auth.currentUser());
-          console.log(Auth._currentUser);
+          PollsService.newPoll($scope.newPoll);
         }
       },
       templateUrl: 'app/templates/new_poll.html'
