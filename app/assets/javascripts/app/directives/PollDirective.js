@@ -6,6 +6,11 @@ app.directive('qpPoll', function QpPoll(){
       poll: '='
     },
     controller: function($scope, PollsService){
+      $scope.response = {};
+      $scope.response.ids = [];
+      $scope.addResponse = function(id){
+        $scope.response.ids.push(id);
+      }
       $scope.submitResponse = function(id, response){
         PollsService.submitResults(id, response);
       }

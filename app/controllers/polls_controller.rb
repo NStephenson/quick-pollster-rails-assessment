@@ -1,3 +1,4 @@
+require 'pry'
 class PollsController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :edit, :update, :destroy ]
   before_action :find_poll, only: [ :edit, :update, :add_results, :destroy]
@@ -49,8 +50,6 @@ class PollsController < ApplicationController
   # end
 
   def create
-    puts "hello!!!!"
-    puts new_poll_params
     @poll = Poll.new(new_poll_params)
     @poll.user = current_user if signed_in?
     if @poll.save
@@ -79,16 +78,30 @@ class PollsController < ApplicationController
   end
 
   def add_results
-    params.require('response')[params[:id]].each do |response_id|
-      response = Response.find(response_id.to_i)
+    response_value = params.require('response')[:id]
+    if response_value.class == ActionController::Parameters
+      response_value.each do |k,v|
+        response = Response.find(k.to_i)
+        if response.poll == @poll #put this logic in a validate response method?
+          response.selected += 1
+          response.save
+          if signed_in? 
+            current_user.responses << response 
+          else
+            #add cookie
+          end 
+        end
+      end
+    else
+      binding.pry
+      response = Response.find(response_value.to_i)
       if response.poll == @poll #put this logic in a validate response method?
         response.selected += 1
         response.save
         if signed_in? 
           current_user.responses << response 
         else
-          #cookies[:polls_responded] = []
-          #cookies[:polls_responded] << @poll.id #need working code to stop users not signed in from casting multiple votes
+          #add cookie
         end 
       end
     end

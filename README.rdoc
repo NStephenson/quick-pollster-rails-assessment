@@ -11,8 +11,6 @@ TODO:
 
     Make Poll form functional
 
-    Add more links to site
-
     Filter that shows answered polls, unanswered polls, or all
 
   Functionality Additions
@@ -29,6 +27,8 @@ TODO:
       After responding to a poll, display poll results
 
     Add Ability to delete polls
+
+    Omniauth sign in
 
 
 
