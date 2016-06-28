@@ -5,14 +5,15 @@
   <input type="text" name="question" ng-model="newPoll.poll.question" required="required" minlength="20">
 
   <div ng-messages="newPollForm.question.$error" ng-if="newPollForm.question.$touched && newPollForm.question.$invalid">
-    <div ng-message="required">Question is required!</div>
-    <div ng-message="minlength">Make it longer.</div>
+    <p ng-message="required">Question is required!</p>
+    <p ng-message="minlength">Make it longer.</p>
   </div><br>
 
   <div ng-repeat="response in newPoll.poll.responses_attributes">
     <label>Response {{$index + 1}}:</label>
-    <input type="text" name="poll" ng-model="response.text"><br>
+    <input type="text" name="response" ng-model="response.text"><br>
   </div>
+
 
   <div>
     <h2>Poll Options</h2>
@@ -27,4 +28,6 @@
   <input type="submit" name="Submit Poll" value="Submit Poll">
 </form>
 
+{{newPoll.poll}}<br>
+<br>
 {{newPollForm | json }}

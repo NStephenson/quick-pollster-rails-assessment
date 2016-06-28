@@ -1,9 +1,24 @@
 <h1>Log In!</h1>
 
-<form ng-submit="login()">
+<form ng-submit="login()" name="loginForm" novalidate>
   <label>Email:</label>
-  <input type="email" name="login" ng-model="creds.login"><br>
+  <input type="email" name="login" ng-model="creds.login" required>
+
+  <div ng-messages="loginForm.login.$error" ng-if="loginForm.login.$touched && loginForm.login.$invalid">
+    <div ng-message="required">An Email is required!</div>
+    <div ng-message="email">Must be a properly formated email address!</div>
+  </div>
+
+  <br>
+
   <label>Password:</label>
-  <input type="password" name="password" ng-model="creds.password"><br>
-  <input type="submit" name="submit" value="Login to Quick Pollster">
+  <input type="password" name="password" ng-model="creds.password" required minlength="6">
+    <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched && loginForm.password.$invalid">
+    <div ng-message="required">A password is required!</div>
+    <div ng-message="minlength">Password must be longer than 6 characters!</div>
+  </div>
+
+  <br>
+
+  <input type="submit" name="submit" value="Login to Quick Pollster" ng-if="loginForm.$valid">
 </form>

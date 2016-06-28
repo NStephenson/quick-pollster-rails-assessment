@@ -1,13 +1,35 @@
 <h1>Sign Up!</h1>
 
-<form ng-submit="signUp()">
+<form ng-submit="signUp()" name="signUp">
+
   <label>Username:</label>
-  <input type="text" name="username" ng-model="creds.username"><br>
+  <input type="text" name="username" ng-model="creds.username" required minlength="5" maxlength="20">
+
+  <div ng-messages="signUp.username.$error" ng-if="signUp.username.$touched && signUp.username.$invalid">
+    <p ng-message="required">A username is required!</p>
+    <p ng-message="minlength">Make it longer!</p>
+    <p ng-message="maxlength">...let's not get carried away. Shorten that username.</p>
+  </div>
+
+  <br>
   <label>Email:</label>
-  <input type="email" name="login" ng-model="creds.email"><br>
+  <input type="email" name="email" ng-model="creds.email" required><br>
+
+  <div ng-messages="signUp.email.$error" ng-if="signUp.email.$touched && signUp.email.$invalid">
+    <p ng-message="required">An Email is required!</p>
+    <p ng-message="email">Must be a properly formated email address!</p>
+  </div>
+
   <label>Password:</label>
-  <input type="password" name="password" ng-model="creds.password"><br>
+  <input type="password" name="password" ng-model="creds.password" required minlength="6"><br>
+
+  <div ng-messages="signUp.password.$error" ng-if="signUp.password.$touched && signUp.password.$invalid">
+    <p ng-message="required">A password is required!</p>
+    <p ng-message="minlength">Make it longer!</p>
+  </div>
+
+  <!--
   <label>Confirm Password:</label>
-  <input type="password" name="password" ng-model="creds.password_confirmation"><br>
-  <input type="submit" name="submit" value="Sign Up">
+  <input type="password" name="password" ng-model="creds.password_confirmation"><br> -->
+  <input type="submit" name="submit" value="Sign Up" ng-if="signUp.$valid">
 </form>
