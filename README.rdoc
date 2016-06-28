@@ -1,5 +1,40 @@
 == README
 
+TODO:
+  Assesment Requirements 
+    Add Form Validation for:
+      Login form
+      Registration form
+      New Poll form
+      Poll directive form
+
+    Make form editable
+
+    Nested view?
+
+    Make Poll form functional
+
+    Add more links to site
+
+    Filter that shows answered polls, unanswered polls, or all
+
+  Functionality Additions
+
+    Block certain pages dependent on login status
+      login, signup, and home for logged out users only
+
+    Navbar for logged in users
+      Polls page, User Page, New Poll Page, user show page
+
+    Redirects after form submission
+      After login and registration, redirect user to their profile page
+      After new poll, redirect user to that poll's page
+      After responding to a poll, display poll results
+
+
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -1,4 +1,4 @@
-function PollsController(polls){
+app.controller('PollsController', function PollsController(polls){
 
 
   this.polls = polls.data;
@@ -12,8 +12,4 @@ function PollsController(polls){
   this.editPoll = function(){}
 
 
-}
-
-angular
-  .module('app')
-  .controller('PollsController', PollsController)
+});

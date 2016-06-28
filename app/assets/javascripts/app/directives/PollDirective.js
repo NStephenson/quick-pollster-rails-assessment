@@ -1,4 +1,4 @@
-function QpPoll(){
+app.directive('qpPoll', function QpPoll(){
   return {
     restrict: 'E',
     templateUrl: 'app/templates/poll_display.html',
@@ -14,8 +14,4 @@ function QpPoll(){
       }
     }
   }
-}
-
-angular
-  .module('app')
-  .directive('qpPoll', QpPoll)
+});

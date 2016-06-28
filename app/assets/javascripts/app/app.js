@@ -1,11 +1,10 @@
-angular
-  .module('app', ['ui.router', 'templates', 'Devise'])
+var app = angular.module('app', ['ui.router', 'templates', 'Devise', 'ngMessages']);
   // .config([
   //   "$httpProvider", function($httpProvider) {
   //     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   //   }
   // ])
-  .config(function($stateProvider){
+app.config(function($stateProvider){
     $stateProvider
     .state('polls', {
       url: '/polls',

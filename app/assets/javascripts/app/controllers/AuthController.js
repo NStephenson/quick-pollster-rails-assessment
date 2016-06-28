@@ -1,4 +1,4 @@
-function AuthController($scope, $state, Auth){
+app.controller('AuthController', function AuthController($scope, $state, Auth){
   
   $scope.login = function(){
     Auth.login($scope.creds);
@@ -12,8 +12,4 @@ function AuthController($scope, $state, Auth){
       console.log(error);
     });
   }
-}
-
-angular
-  .module('app')
-  .controller('AuthController', AuthController)
+});
