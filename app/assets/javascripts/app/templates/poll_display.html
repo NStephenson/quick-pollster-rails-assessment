@@ -1,6 +1,22 @@
+<h2> <a ui-sref="poll({id: poll.id})">{{poll.question}}</a></h2>
+<p> by <a ui-sref="user({id: poll.user.id})">{{poll.user.username}}</a></p>
+<p>
+  <a href="" ng-click="toggleEdit()">Edit This Poll</a>
+  <a href="">Delete this Poll</a>
+</p>
+<form ng-submit="submitEdit()" ng-if="showEdit">
+  <h5>Poll Options</h5>
+  <label>Allow multiple responses?:</label>
+  <input type="checkbox" name="poll" ng-model="poll.select_multiple"><br>
+  <label>Make Results Public?:</label>
+  <input type="checkbox" name="poll" ng-model="poll.public_results"><br>
+  <label>Uncheck to Close this poll:</label>
+  <input type="checkbox" name="poll" ng-model="poll.open"><br>
+  <input type="submit" name="submit" value="Edit Poll Options">
+</form>
+<br>
+
 <form ng-submit="submitResponse(poll.id, response)">
-  <h2> <a ui-sref="poll({id: poll.id})">{{poll.question}}</a></h2>
-  <p> by <a ui-sref="user({id: poll.user.id})">{{poll.user.username}}</a></p>
   <div ng-repeat="response in poll.responses track by response.id" ng-switch on="poll.select_multiple">
 
     <input ng-switch-when="true" type="checkbox" name="{{respose.text}}" value="{{response.text}}" ng-model="$parent.$parent.response.response.id[response.id]">
@@ -8,9 +24,8 @@
     <input ng-switch-when="false" type="radio" name="responses" value="{{response.id}}" ng-model="$parent.$parent.response.response.id"> 
     {{response.text}} - {{response.selected}} {{poll.options}}
   </div> 
-  <input type="submit" id="submit" value="Submit" />
+  <input type="submit" id="submit" value="Submit" ng-if="!showEdit"/>
   
 </form>
-{{response}}
 
 

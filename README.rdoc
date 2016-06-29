@@ -9,8 +9,6 @@ TODO:
 
     Nested view?
 
-    Make Poll form functional
-
     Filter that shows answered polls, unanswered polls, or all
 
   Functionality Additions

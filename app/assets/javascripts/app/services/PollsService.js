@@ -10,10 +10,14 @@ app.service('PollsService', function PollsService($http){
 
   this.getPoll = function(id){
     return $http.get('/polls/' + id + '.json');
-  } 
+  }
 
   this.submitResults = function(id, response){
     $http.post('/polls/' + id + '/results.json', response);
+  }
+
+  this.editPoll = function(id, edit){
+    $http.patch('/polls/' + id + '.json', edit);
   }
 
 });

@@ -1,4 +1,3 @@
-require 'pry'
 class PollsController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :edit, :update, :destroy ]
   before_action :find_poll, only: [ :edit, :update, :add_results, :destroy]
@@ -69,8 +68,9 @@ class PollsController < ApplicationController
   def update
     @poll.update(edit_poll_params)
     if @poll.save
-      flash[:notice] = "Poll options updated!"
-      redirect_to poll_path(@poll)
+      respond_to do |format|
+        format.json {render json: @polls}
+      end
     else
       flash[:error] = "Somehow, you managed to fuck up. Congrats."
       render action: 'edit'
@@ -93,7 +93,6 @@ class PollsController < ApplicationController
         end
       end
     else
-      binding.pry
       response = Response.find(response_value.to_i)
       if response.poll == @poll #put this logic in a validate response method?
         response.selected += 1
