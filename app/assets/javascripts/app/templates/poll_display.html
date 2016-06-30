@@ -1,9 +1,12 @@
+{{currentUser.votes[1]}}
 <h2> <a ui-sref="poll({id: poll.id})">{{poll.question}}</a></h2>
 <p> by <a ui-sref="user({id: poll.user.id})">{{poll.user.username}}</a></p>
-<p>
-  <a href="" ng-click="toggleEdit()">Edit This Poll</a>
+
+<div ng-if="currentUser.id === poll.user.id">
+  <a href="" ng-click="$parent.toggleEdit()">Edit This Poll</a>
   <a href="">Delete this Poll</a>
-</p>
+</div>
+
 <form ng-submit="submitEdit()" ng-if="showEdit">
   <h5>Poll Options</h5>
   <label>Allow multiple responses?:</label>

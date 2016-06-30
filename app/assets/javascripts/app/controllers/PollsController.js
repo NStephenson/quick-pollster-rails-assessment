@@ -1,15 +1,8 @@
-app.controller('PollsController', function PollsController(polls){
+app.controller('PollsController', function PollsController(polls, $filter){
 
 
   this.polls = polls.data;
 
-  this.submitResponse = function(){
-    debugger;
-  }
-
-  this.createPoll = function(){}
-
-  this.editPoll = function(){}
-
+  this.search = '';
 
 });

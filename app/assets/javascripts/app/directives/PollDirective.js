@@ -5,12 +5,16 @@ app.directive('qpPoll', function QpPoll(){
     scope: {
       poll: '='
     },
-    controller: function($scope, PollsService){
-      $scope.showEdit = false;
+    controller: function($scope, PollsService, Auth){
+      Auth.currentUser().then(function(user) { 
+        $scope.currentUser = user; 
+      });
 
       $scope.submitResponse = function(id, response){
         PollsService.submitResults(id, response);
       }
+
+      $scope.showEdit = false;
 
       $scope.toggleEdit = function(){
         if ($scope.showEdit === false) {

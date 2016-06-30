@@ -5,10 +5,6 @@ TODO:
     Add Form Validation for:
       Poll directive form
 
-    Make form editable
-
-    Nested view?
-
     Filter that shows answered polls, unanswered polls, or all
 
   Functionality Additions
