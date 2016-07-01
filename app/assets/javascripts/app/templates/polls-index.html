@@ -1,26 +1,12 @@
 
 <h1>Published Polls</h1>
-<!-- <div ng-repeat="poll in ctrl.polls track by poll.id">
-  <h2>{{poll.question}}</h2>
 
-  <p> by {{poll.user.username}}</p>
-  <ul ng-repeat="response in poll.responses">
-    <li>{{response.text}} - {{response.selected}}
-  </ul>
-</div>
+<a href="" ng-click="ctrl.test()">test</a>
 
+<select ng-change="ctrl.refilter()" ng-model="ctrl.setting">
+  <option ng-repeat="option in ctrl.filterOptions" value="{{option}}">{{option}}</option>
+</select>
 
-<form ng-repeat="poll in ctrl.polls track by poll.id" ng-submit="submitResponse()">
-  <h2>{{poll.question}}</h2>
-  <p> by {{poll.user.username}}</p>
-  <div ng-repeat="response in poll.responses">
-    <input type="checkbox" name="{{response.text}}" value="{{response.id}}"> {{response.text}} - {{response.selected}} 
-  </div> 
-  <input type="submit" id="submit" value="Submit" />
-  
-</form> -->
-
-<div ng-repeat="poll in ctrl.polls track by poll.id">
-<qp-poll poll="poll">
-</qp-poll>
+<div ng-repeat="poll in ctrl.filteredPolls track by poll.id">
+  <qp-poll poll="poll"></qp-poll>
 </div>
