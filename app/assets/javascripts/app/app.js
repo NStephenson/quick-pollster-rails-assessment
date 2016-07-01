@@ -45,7 +45,7 @@ app.config(function($stateProvider){
     })
     .state('signUp',{
       url: '/signup',
-      controller: 'AuthController',
+      controller: 'AuthController as ctrl',
       templateUrl: 'app/templates/auth/registration.html'
     })
     .state('newPoll', {

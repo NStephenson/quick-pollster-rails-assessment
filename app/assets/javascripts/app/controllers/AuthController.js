@@ -1,12 +1,12 @@
-app.controller('AuthController', function AuthController($scope, $state, Auth){
+app.controller('AuthController', function AuthController($state, Auth){
   
-  $scope.login = function(){
-    Auth.login($scope.creds);
+  this.login = function(){
+    Auth.login(this.creds);
   }
 
-  $scope.signUp = function(){
-    console.log($scope.creds);
-    Auth.register($scope.creds).then(function(user){
+  this.signUp = function(){
+    console.log(this.creds);
+    Auth.register(this.creds).then(function(user){
       console.log(user);
     }, function(error){
       console.log(error);

@@ -2,6 +2,8 @@ app.controller('PollsController', function PollsController(polls, $filter, Auth)
 
   this.filterOptions = ['all', 'responded', 'unresponded'];
 
+  this.currentUser = '';
+
   Auth.currentUser().then(function(user) { 
     this.currentUser = user; 
   });
@@ -18,7 +20,9 @@ app.controller('PollsController', function PollsController(polls, $filter, Auth)
   this.refilter();
 
   this.test = function(){
-    console.log(this.currentUser);
+    console.log(Auth.currentUser().then(function(person) { 
+      this.currentUser = person; 
+    }));
   }
 
 });

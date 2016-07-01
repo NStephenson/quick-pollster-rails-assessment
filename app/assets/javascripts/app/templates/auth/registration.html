@@ -1,9 +1,9 @@
 <h1>Sign Up!</h1>
 
-<form ng-submit="signUp()" name="signUp">
+<form ng-submit="ctrl.signUp()" name="signUp">
 
   <label>Username:</label>
-  <input type="text" name="username" ng-model="creds.username" required minlength="5" maxlength="20">
+  <input type="text" name="username" ng-model="ctrl.creds.username" required minlength="5" maxlength="20">
 
   <div ng-messages="signUp.username.$error" ng-if="signUp.username.$touched && signUp.username.$invalid">
     <p ng-message="required">A username is required!</p>
@@ -13,7 +13,7 @@
 
   <br>
   <label>Email:</label>
-  <input type="email" name="email" ng-model="creds.email" required><br>
+  <input type="email" name="email" ng-model="ctrl.creds.email" required><br>
 
   <div ng-messages="signUp.email.$error" ng-if="signUp.email.$touched && signUp.email.$invalid">
     <p ng-message="required">An Email is required!</p>
@@ -21,7 +21,7 @@
   </div>
 
   <label>Password:</label>
-  <input type="password" name="password" ng-model="creds.password" required minlength="6"><br>
+  <input type="password" name="password" ng-model="ctrl.creds.password" required minlength="6"><br>
 
   <div ng-messages="signUp.password.$error" ng-if="signUp.password.$touched && signUp.password.$invalid">
     <p ng-message="required">A password is required!</p>
