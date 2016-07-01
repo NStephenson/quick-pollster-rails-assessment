@@ -7,24 +7,24 @@ app.filter('filterPollByResponseStatus', function(){
 
     } else if (setting === 'responded') {
 
-      currentUser.votes.forEach(function(votedPoll){
-        var responded = polls.find(function(poll){
-          return poll.id === votedPoll.id;
+      polls.forEach(function(poll){
+        var responded = currentUser.votes.find(function(vote){
+          return poll.id === vote.poll.id;
         });
         if (responded){
-          filtered.push(value);
+          filtered.push(poll);
          }
       });
       return filtered;
 
     } else if (setting === 'unresponded'){
 
-      currentUser.votes.forEach(function(votedPoll){
-        var responded = polls.find(function(poll){
-          return poll.id !== votedPoll.id;
+      polls.forEach(function(poll){
+        var responded = currentUser.votes.find(function(vote){
+          return poll.id === vote.poll.id;
         });
-        if (responded){
-          filtered.push(value);
+        if (!responded){
+          filtered.push(poll);
          }
       });
       return filtered;

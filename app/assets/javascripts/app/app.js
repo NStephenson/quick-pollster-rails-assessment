@@ -40,7 +40,7 @@ app.config(function($stateProvider){
     })
     .state('login',{
       url: '/login',
-      controller: 'AuthController',
+      controller: 'AuthController as ctrl',
       templateUrl: 'app/templates/auth/login.html'
     })
     .state('signUp',{

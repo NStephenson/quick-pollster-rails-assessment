@@ -1,11 +1,9 @@
-app.controller('PollsController', function PollsController(polls, $filter, Auth){
+app.controller('PollsController', function PollsController(polls, $filter, Auth, $scope){
 
   this.filterOptions = ['all', 'responded', 'unresponded'];
 
-  this.currentUser = '';
-
   Auth.currentUser().then(function(user) { 
-    this.currentUser = user; 
+    $scope.currentUser = user; 
   });
 
   this.polls = polls.data;
@@ -14,15 +12,13 @@ app.controller('PollsController', function PollsController(polls, $filter, Auth)
 
 
   this.refilter = function() {
-    this.filteredPolls = $filter('filterPollByResponseStatus')(this.polls, this.currentUser, this.setting);
+    this.filteredPolls = $filter('filterPollByResponseStatus')(this.polls, $scope.currentUser, this.setting);
   }
 
   this.refilter();
 
   this.test = function(){
-    console.log(Auth.currentUser().then(function(person) { 
-      this.currentUser = person; 
-    }));
+    console.log($scope.currentUser);
   }
 
 });
