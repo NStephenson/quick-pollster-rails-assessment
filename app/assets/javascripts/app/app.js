@@ -8,7 +8,7 @@ app.config(function($stateProvider){
     $stateProvider
     .state('polls', {
       url: '/polls',
-      controller: 'PollsController as ctrl',
+      controller: 'PollsController as vm',
       templateUrl: 'app/templates/polls-index.html',
       resolve: {
         polls: function(PollsService){
@@ -30,7 +30,7 @@ app.config(function($stateProvider){
     })
     .state('poll', {
       url: '/polls/:id',
-      controller: 'PollsController as ctrl',
+      controller: 'PollsController as vm',
       templateUrl: 'app/templates/poll_show.html',
       resolve: {
         polls: function(PollsService, $stateParams){
@@ -40,22 +40,20 @@ app.config(function($stateProvider){
     })
     .state('login',{
       url: '/login',
-      controller: 'AuthController as ctrl',
+      controller: 'AuthController as vm',
       templateUrl: 'app/templates/auth/login.html'
     })
     .state('signUp',{
       url: '/signup',
-      controller: 'AuthController as ctrl',
+      controller: 'AuthController as vm',
       templateUrl: 'app/templates/auth/registration.html'
     })
     .state('newPoll', {
-      url: '/polls/new',
-      controller: function($scope, PollsService){
-        $scope.newPoll = {};
-        $scope.newPoll.poll = {};
-        $scope.newPoll.poll.responses_attributes = [ { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' } ];
-        $scope.createNewPoll = function(){
-          PollsService.newPoll($scope.newPoll);
+      url: '/newpoll',
+      controller: "PollsController as vm",
+      resolve: {
+        polls: function(PollsService){
+          return PollsService.getPolls();
         }
       },
       templateUrl: 'app/templates/new_poll.html'

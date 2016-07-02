@@ -2,33 +2,36 @@ app.directive('qpPoll', function QpPoll(){
   return {
     restrict: 'E',
     templateUrl: 'app/templates/poll_display.html',
-    scope: {
-      poll: '='
-    },
-    controller: function($scope, PollsService, Auth){
+    scope: {},
+    controller: function(PollsService, Auth){
+      var ctrl = this;
+
       Auth.currentUser().then(function(user) { 
-        $scope.currentUser = user; 
+        ctrl.currentUser = user; 
       });
 
-      $scope.submitResponse = function(id, response){
+      ctrl.submitResponse = function(id, response){
         PollsService.submitResults(id, response);
       }
 
-      $scope.showEdit = false;
+      ctrl.showEdit = false;
 
-      $scope.toggleEdit = function(){
-        if ($scope.showEdit === false) {
-          $scope.showEdit = true;
-        } else if($scope.showEdit === true){
-          $scope.showEdit = false;
+      ctrl.toggleEdit = function(){
+        // add function to clear any input
+        if (ctrl.showEdit === false) {
+          ctrl.showEdit = true;
+        } else if(ctrl.showEdit === true){
+          ctrl.showEdit = false;
         }
+        // add logic to set the setting to whatever is actually saved
       }
 
-      $scope.submitEdit = function(){
-        PollsService.editPoll($scope.poll.id, $scope.poll);
-        $scope.toggleEdit();
+      ctrl.submitEdit = function(){
+        PollsService.editPoll(ctrl.poll.id, ctrl.poll);
+        ctrl.toggleEdit();
       }
-
-    }
+    },
+    controllerAs: 'vm',
+    bindToController: {poll: '='}
   }
 });

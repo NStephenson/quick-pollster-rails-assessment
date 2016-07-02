@@ -1,24 +1,37 @@
-app.controller('PollsController', function PollsController(polls, $filter, Auth, $scope){
+app.controller('PollsController', function PollsController(polls, $filter, Auth, PollsService, $state){
+  var ctrl = this;
 
-  this.filterOptions = ['all', 'responded', 'unresponded'];
+  ctrl.filterOptions = ['all', 'responded', 'unresponded'];
 
   Auth.currentUser().then(function(user) { 
-    $scope.currentUser = user; 
+    ctrl.currentUser = user; 
   });
 
-  this.polls = polls.data;
+  ctrl.polls = polls.data;
 
-  this.setting = 'all';
+  ctrl.setting = 'all';
 
 
-  this.refilter = function() {
-    this.filteredPolls = $filter('filterPollByResponseStatus')(this.polls, $scope.currentUser, this.setting);
+  ctrl.refilter = function() {
+    ctrl.filteredPolls = $filter('filterPollByResponseStatus')(ctrl.polls, ctrl.currentUser, ctrl.setting);
   }
 
-  this.refilter();
+  ctrl.refilter();
 
-  this.test = function(){
-    console.log($scope.currentUser);
+  ctrl.test = function(){
+    console.log(ctrl.currentUser);
+  }
+
+  // New Poll functions
+
+  ctrl.newPoll = {};
+  ctrl.newPoll.poll = {};
+  ctrl.newPoll.poll.responses_attributes = [ { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' } ];
+
+  ctrl.createNewPoll = function(){
+    PollsService.newPoll(ctrl.newPoll).then(function(poll){
+      $state.go('poll', {id: poll.data.id})
+    });
   }
 
 });

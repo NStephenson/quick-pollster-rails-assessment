@@ -1,13 +1,9 @@
-
 <h1>Published Polls</h1>
-{{currentUser.votes}}
 
-<a href="" ng-click="ctrl.test()">test</a>
-
-<select ng-change="ctrl.refilter()" ng-model="ctrl.setting">
-  <option ng-repeat="option in ctrl.filterOptions" value="{{option}}">{{option}}</option>
+<select ng-change="vm.refilter()" ng-model="vm.setting">
+  <option ng-repeat="option in vm.filterOptions" value="{{option}}">{{option}}</option>
 </select>
 
-<div ng-repeat="poll in ctrl.filteredPolls track by poll.id">
+<div ng-repeat="poll in vm.filteredPolls track by poll.id">
   <qp-poll poll="poll"></qp-poll>
 </div>

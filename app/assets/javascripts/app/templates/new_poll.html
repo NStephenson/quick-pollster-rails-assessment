@@ -1,15 +1,15 @@
 <h1>Create a new poll:</h1>
-<form ng-submit="createNewPoll()" name="newPollForm" novalidate>
+<form ng-submit="vm.createNewPoll()" name="newPollForm" novalidate>
 
   <label>Question:</label>
-  <input type="text" name="question" ng-model="newPoll.poll.question" required="required" minlength="20">
+  <input type="text" name="question" ng-model="vm.newPoll.poll.question" required="required" minlength="20">
 
   <div ng-messages="newPollForm.question.$error" ng-if="newPollForm.question.$touched && newPollForm.question.$invalid">
     <p ng-message="required">Question is required!</p>
     <p ng-message="minlength">Make it longer.</p>
   </div><br>
 
-  <div ng-repeat="response in newPoll.poll.responses_attributes">
+  <div ng-repeat="response in vm.newPoll.poll.responses_attributes">
     <label>Response {{$index + 1}}:</label>
     <input type="text" name="response" ng-model="response.text"><br>
   </div>
@@ -18,11 +18,11 @@
   <div>
     <h2>Poll Options</h2>
     <label>Allow multiple responses?:</label>
-    <input type="checkbox" name="poll" ng-model="newPoll.poll.select_multiple"><br>
+    <input type="checkbox" name="poll" ng-model="vm.newPoll.poll.select_multiple"><br>
     <label>Publish this Poll?:</label>
-    <input type="checkbox" name="poll" ng-model="newPoll.poll.published"><br>
+    <input type="checkbox" name="poll" ng-model="vm.newPoll.poll.published"><br>
     <label>Make Results Public?:</label>
-    <input type="checkbox" name="poll" ng-model="newPoll.poll.public_results"><br>
+    <input type="checkbox" name="poll" ng-model="vm.newPoll.poll.public_results"><br>
   </div>
 
   <input type="submit" name="Submit Poll" value="Submit Poll">
