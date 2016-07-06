@@ -15,7 +15,7 @@
   </div>
 
 
-  <div>
+  <div ng-if="vm.currentUser">
     <h2>Poll Options</h2>
     <label>Allow multiple responses?:</label>
     <input type="checkbox" name="poll" ng-model="vm.newPoll.poll.select_multiple"><br>

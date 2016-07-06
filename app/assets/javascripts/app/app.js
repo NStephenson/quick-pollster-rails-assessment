@@ -4,8 +4,32 @@ var app = angular.module('app', ['ui.router', 'templates', 'Devise', 'ngMessages
   //     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
   //   }
   // ])
-app.config(function($stateProvider){
+app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
+    .state('welcome', {
+      url: '/',
+      templateUrl: 'app/templates/welcome.html',
+    })
+    .state('welcome.newPoll', {
+      url: 'newpoll',
+      controller: 'PollsController as vm',
+      templateUrl: 'app/templates/new_poll.html',
+      resolve: {
+        polls: function(){
+          return {};
+        }
+      }
+    })
+    .state('welcome.login',{
+      url: 'login',
+      controller: 'AuthController as vm',
+      templateUrl: 'app/templates/auth/login.html'
+    })
+    .state('welcome.signUp',{
+      url: 'signup',
+      controller: 'AuthController as vm',
+      templateUrl: 'app/templates/auth/registration.html'
+    })
     .state('polls', {
       url: '/polls',
       controller: 'PollsController as vm',
@@ -68,4 +92,6 @@ app.config(function($stateProvider){
         }
       }
     });
+
+    $urlRouterProvider.otherwise('/');
   });
