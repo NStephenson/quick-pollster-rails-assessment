@@ -20,4 +20,8 @@ app.service('PollsService', function PollsService($http){
     $http.patch('/polls/' + id + '.json', edit);
   }
 
+  this.deletePoll = function(poll){
+    $http.delete('/polls/' + poll.id + '.json');
+  }
+
 });

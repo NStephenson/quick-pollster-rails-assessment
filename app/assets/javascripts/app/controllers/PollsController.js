@@ -18,10 +18,6 @@ app.controller('PollsController', function PollsController(polls, $filter, Auth,
 
   ctrl.refilter();
 
-  ctrl.test = function(){
-    console.log(ctrl.currentUser);
-  }
-
   // New Poll functions
 
   ctrl.newPoll = {};

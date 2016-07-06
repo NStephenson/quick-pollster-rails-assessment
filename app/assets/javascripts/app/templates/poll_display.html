@@ -3,7 +3,7 @@
 
 <div ng-if="vm.currentUser.id === vm.poll.user.id">
   <a href="" ng-click="vm.toggleEdit()">Edit This Poll</a>
-  <a href="">Delete this Poll</a>
+  <a href="" ng-click="vm.deletePoll()">Delete this Poll</a>
 </div>
 
 <form ng-submit="vm.submitEdit()" ng-if="vm.showEdit">
@@ -29,6 +29,4 @@
   <input type="submit" id="submit" value="Submit" ng-if="!vm.showEdit"/>
   
 </form>
-
-{{vm.poll | json}}
 

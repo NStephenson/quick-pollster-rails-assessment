@@ -10,6 +10,10 @@ app.directive('qpPoll', function QpPoll(){
         ctrl.currentUser = user; 
       });
 
+      ctrl.deletePoll = function(){
+        PollsService.deletePoll(ctrl.poll);
+      }
+
       ctrl.submitResponse = function(id, response){
         PollsService.submitResults(id, response);
       }
