@@ -8,10 +8,14 @@ TODO:
 
   Functionality Additions
 
+    User Page
+      Published Polls should only display published polls
+      There should be a state so that users can view all their polls 
+
     Block certain pages dependent on login status
       login, signup, and home for logged out users only
 
-    Redirects after form submission
+    Events after form submission
       After responding to a poll, display poll results
 
     Poll functionality
@@ -19,7 +23,13 @@ TODO:
       Allow Poll to have hidden results
       Make poll closed to users that have answered already
       Allow users to view results without answering
-      (I'm currently thinking this will require a new directive, then the two directives can be linked in a directive that uses these two directives as dependencies)
+
+      Poll Conditions
+        1. The poll is closed: No one should be able to view poll form, should load results only
+
+        2.The user has responded to the poll: Only this user should not be able to submit nor view the poll form
+
+        3. The Poll is open: The user should be able to view the poll form and results at will.
 
     Votes
       Add votes to user page

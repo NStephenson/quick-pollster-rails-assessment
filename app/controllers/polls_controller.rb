@@ -28,10 +28,6 @@ class PollsController < ApplicationController
       respond_to do |format|
         format.json {render json: @poll}
       end
-    end
-
-    if signed_in?
-      redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
     end 
   end
 

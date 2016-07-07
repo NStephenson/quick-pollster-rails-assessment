@@ -1,32 +1,10 @@
-<h2> <a ui-sref="poll({id: vm.poll.id})">{{vm.poll.question}}</a></h2>
-<p ng-if="vm.poll.user"> by <a ui-sref="user({id: vm.poll.user.id})">{{vm.poll.user.username}}</a></p>
-
-<div ng-if="vm.currentUser && vm.currentUser.id === vm.poll.user.id">
-  <a href="" ng-click="vm.toggleEdit()">Edit This Poll</a>
-  <a href="" ng-click="vm.deletePoll()">Delete this Poll</a>
+<div ng-if="vm.poll.public_results || vm.currentUser.id === vm.poll.user.id">
+  <p ng-if="!vm.poll.public_results">These results are private. Only you can see them.</p>
+  <div ng-repeat="response in vm.poll.responses track by response.id">
+    {{response.text}} - {{response.selected}}
+  </div>
 </div>
 
-<form ng-submit="vm.submitEdit()" ng-if="vm.showEdit">
-  <h5>Poll Options</h5>
-  <label>Allow multiple responses?:</label>
-  <input type="checkbox" name="poll" ng-model="vm.poll.select_multiple"><br>
-  <label>Make Results Public?:</label>
-  <input type="checkbox" name="poll" ng-model="vm.poll.publicResults"><br>
-  <label>Uncheck to Close this poll:</label>
-  <input type="checkbox" name="poll" ng-model="vm.poll.open"><br>
-  <input type="submit" name="submit" value="Edit Poll Options">
-</form>
-<br>
-
-<form ng-submit="vm.submitResponse(poll.id, response)">
-  <div ng-repeat="response in vm.poll.responses track by response.id" ng-switch on="vm.poll.select_multiple">
-
-    <input ng-switch-when="true" type="checkbox" name="{{respose.text}}" value="{{response.text}}" ng-model="vm.response.response.id[response.id]">
-
-    <input ng-switch-when="false" type="radio" name="responses" value="{{response.id}}" ng-model="vm.response.response.id"> 
-    {{response.text}} - {{response.selected}} {{poll.options}}
-  </div> 
-  <input type="submit" id="submit" value="Submit" ng-if="!vm.showEdit"/>
-  
-</form>
-
+<div ng-if="!vm.poll.public_results && vm.currentUser.id != vm.poll.user.id">
+  <p>This Poll's results are set to Private. Only the owner can see the results.</p>
+</div>
