@@ -8,7 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
     .state('welcome', {
       url: '/',
-      templateUrl: 'app/templates/welcome.html',
+      templateUrl: 'app/templates/welcome.html'
     })
     .state('welcome.newPoll', {
       url: 'newpoll',
@@ -40,18 +40,6 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
-    .state('user.newPoll', {
-      url: '/newpoll',
-      controller: function($scope, PollsService){
-        $scope.newPoll = {};
-        $scope.newPoll.poll = {};
-        $scope.newPoll.poll.responses_attributes = [ { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' }, { text: '' } ];
-        $scope.createNewPoll = function(){
-          PollsService.newPoll($scope.newPoll);
-        }
-      },
-      templateUrl: 'app/templates/new_poll.html'
-    })
     .state('poll', {
       url: '/polls/:id',
       controller: 'PollsController as vm',
@@ -76,8 +64,8 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/newpoll',
       controller: "PollsController as vm",
       resolve: {
-        polls: function(PollsService){
-          return PollsService.getPolls();
+        polls: function(){
+          return {};
         }
       },
       templateUrl: 'app/templates/new_poll.html'

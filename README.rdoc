@@ -4,24 +4,33 @@ TODO:
   Assesment Requirements 
     Add Form Validation for:
       Poll directive form
+      New Poll responses
 
   Functionality Additions
 
     Block certain pages dependent on login status
       login, signup, and home for logged out users only
 
-    Navbar for logged in users
-      Polls page, User Page, New Poll Page, user show page
-
     Redirects after form submission
-      After login and registration, redirect user to their profile page
-      After new poll, redirect user to that poll's page
       After responding to a poll, display poll results
 
-    Add Ability to delete polls
+    Poll functionality
+      Allow Poll to be closed
+      Allow Poll to have hidden results
+      Make poll closed to users that have answered already
+      Allow users to view results without answering
+      (I'm currently thinking this will require a new directive, then the two directives can be linked in a directive that uses these two directives as dependencies)
+
+    Votes
+      Add votes to user page
+      add option for votes to be either public or private
 
     Omniauth sign in
 
+
+Questions for Assessment
+
+  Should I keep the current user on the rootscope and have my code access it from there? For example, instead of using ctrl.currentUser should I be using $rootScope.currentUser?
 
 
 
