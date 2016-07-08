@@ -6,9 +6,24 @@ app.directive('qpPollCard', function(){
     controller: function(PollsService, Auth){
       var ctrl = this;
 
+      ctrl.isAvailable = true;
+
+      ctrl.checkResponded = function(){
+        ctrl.currentUser.votes.forEach(function(vote){
+          if (vote.poll.id === ctrl.poll.id) {
+            ctrl.isAvailable = false;
+          }
+        })
+      }
+
       Auth.currentUser().then(function(user) { 
         ctrl.currentUser = user; 
+        ctrl.checkResponded();
       });
+
+      if (!ctrl.poll.open) {
+        ctrl.isAvailable = false;
+      }
 
       ctrl.deletePoll = function(){
         PollsService.deletePoll(ctrl.poll);

@@ -2,36 +2,26 @@
 
 TODO:
   Assesment Requirements 
-    Add Form Validation for:
+    **Add Form Validation for:
       Poll directive form
       New Poll responses
 
   Functionality Additions
 
-    User Page
+    ***User Page
       Published Polls should only display published polls
       There should be a state so that users can view all their polls 
 
-    Block certain pages dependent on login status
+    **Block certain pages dependent on login status
       login, signup, and home for logged out users only
 
-    Events after form submission
+    *Events after form submission
       After responding to a poll, display poll results
 
-    Poll functionality
-      Allow Poll to be closed
-      Allow Poll to have hidden results
-      Make poll closed to users that have answered already
+    *Poll functionality
       Allow users to view results without answering
 
-      Poll Conditions
-        1. The poll is closed: No one should be able to view poll form, should load results only
-
-        2.The user has responded to the poll: Only this user should not be able to submit nor view the poll form
-
-        3. The Poll is open: The user should be able to view the poll form and results at will.
-
-    Votes
+    ***Votes
       Add votes to user page
       add option for votes to be either public or private
 

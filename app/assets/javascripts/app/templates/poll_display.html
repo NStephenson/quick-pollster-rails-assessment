@@ -1,8 +1,10 @@
 <div ng-if="vm.poll.public_results || vm.currentUser.id === vm.poll.user.id">
   <p ng-if="!vm.poll.public_results">These results are private. Only you can see them.</p>
+  <ul>
   <div ng-repeat="response in vm.poll.responses track by response.id">
-    {{response.text}} - {{response.selected}}
+    <li>{{response.text}} - {{response.selected}}
   </div>
+  </ul>
 </div>
 
 <div ng-if="!vm.poll.public_results && vm.currentUser.id != vm.poll.user.id">

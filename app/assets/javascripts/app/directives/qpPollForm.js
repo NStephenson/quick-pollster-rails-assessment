@@ -10,8 +10,9 @@ app.directive('qpPollForm', function QpPoll(){
         ctrl.currentUser = user; 
       });
 
-      ctrl.submitResponse = function(id, response){
-        PollsService.submitResults(id, response);
+      ctrl.submitResponse = function(response){
+        console.log(response);
+        PollsService.submitResults(ctrl.poll.id, response);
       }
 
     },
