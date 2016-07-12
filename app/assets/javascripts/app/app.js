@@ -42,6 +42,17 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       }
     })
+    // .state('myPolls', {
+    //   url: '/mypolls',
+    //   controller: 'UsersController as vm',
+    //   templateUrl: 'app/templates/mypolls.html',
+    //   data: { authRequired: true },
+    //   resolve: {
+    //     user: function(UserService){
+    //       UserService.getUser
+    //     }
+    //   }
+    // })
     .state('poll', {
       url: '/polls/:id',
       controller: 'PollsController as vm',
@@ -76,7 +87,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     })
     .state('user', {
       url: '/user/:id',
-      controller: 'UsersController as ctrl',
+      controller: 'UsersController as vm',
       templateUrl: 'app/templates/user.html',
       data: { authRequired: true },
       resolve: {

@@ -24,4 +24,8 @@ app.service('PollsService', function PollsService($http){
     return $http.delete('/polls/' + poll.id + '.json');
   }
 
+  this.getUserPolls = function(user){
+    return $http.get('/users/' + user.id + '/polls.json');
+  }
+
 });

@@ -1,4 +1,3 @@
-<a href="" ui-sref="welcome">test</a>
 <h2> <a ui-sref="poll({id: vm.poll.id})">{{vm.poll.question}}</a></h2>
 <p ng-if="vm.poll.user"> by <a ui-sref="user({id: vm.poll.user.id})">{{vm.poll.user.username}}</a></p>
 
@@ -26,5 +25,3 @@
 <div ng-if="vm.isAvailable && vm.poll.open">
   <qp-poll-form poll="vm.poll"></qp-poll-form>
 </div>
-
-{{vm.poll.responses}}

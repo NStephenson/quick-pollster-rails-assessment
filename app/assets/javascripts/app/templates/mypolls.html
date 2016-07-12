@@ -1,0 +1,5 @@
+<h2>All of Your Polls</h2>
+
+<div ng-repeat="poll in vm.user.polls track by poll.id">
+  <qp-poll-card poll="poll"></qp-poll-card>
+</div>
