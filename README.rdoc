@@ -19,7 +19,6 @@ TODO:
   Functionality Additions
 
     ***User Page
-      Published Polls should only display published polls
       There should be a state so that users can view all their polls 
 
     *Poll functionality

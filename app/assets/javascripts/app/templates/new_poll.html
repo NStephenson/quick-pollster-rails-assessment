@@ -1,4 +1,4 @@
-<h1>Create a new poll:</h1>
+  <h1>Create a new poll:</h1>
 <form ng-submit="vm.createNewPoll()" name="newPollForm" novalidate>
 
   <label>Question:</label>
@@ -11,7 +11,7 @@
 
   <div ng-repeat="response in vm.newPoll.poll.responses_attributes">
     <label>Response {{$index + 1}}:</label>
-    <input type="text" name="response" ng-model="response.text"><br>
+    <input type="text" name="response" ng-model="response.text" integer><br>
   </div>
 
 
@@ -27,3 +27,5 @@
 
   <input type="submit" name="Submit Poll" value="Submit Poll">
 </form>
+
+{{newPollForm}}
