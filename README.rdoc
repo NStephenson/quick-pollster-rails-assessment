@@ -1,5 +1,15 @@
 == README
 
+Plan:
+  1. Add page for user to view all their polls, only owner of page should be able to view
+  2. Add controller filter to search their own polls
+  3. Fix Poll submission issue
+  4. Add validations
+  5. Add password confirmation
+  6. Add view results link
+  7. Add CSRF back
+
+
 TODO:
   Assesment Requirements 
     **Add Form Validation for:
@@ -12,12 +22,6 @@ TODO:
       Published Polls should only display published polls
       There should be a state so that users can view all their polls 
 
-    **Block certain pages dependent on login status
-      login, signup, and home for logged out users only
-
-    *Events after form submission
-      After responding to a poll, display poll results
-
     *Poll functionality
       Allow users to view results without answering
 
@@ -25,7 +29,21 @@ TODO:
       Add votes to user page
       add option for votes to be either public or private
 
-    Omniauth sign in
+    Sign in/up
+      Add password confirmation
+      Omniauth sign in
+
+    Add debug option to unanswer a question
+
+    Add Pagination for Polls
+
+  Known Bugs/Issues
+
+    CSRF tokens need to be reapplied
+
+    After Poll Submission, if the user clicks on a link to another page the poll acts 
+    as it hasn't been submitted until a refresh.
+
 
 
 Questions for Assessment

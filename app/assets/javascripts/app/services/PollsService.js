@@ -13,15 +13,15 @@ app.service('PollsService', function PollsService($http){
   }
 
   this.submitResults = function(id, response){
-    $http.post('/polls/' + id + '/results.json', response);
+    return $http.post('/polls/' + id + '/results.json', response);
   }
 
   this.editPoll = function(id, edit){
-    $http.patch('/polls/' + id + '.json', edit);
+    return $http.patch('/polls/' + id + '.json', edit);
   }
 
   this.deletePoll = function(poll){
-    $http.delete('/polls/' + poll.id + '.json');
+    return $http.delete('/polls/' + poll.id + '.json');
   }
 
 });

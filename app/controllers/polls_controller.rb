@@ -93,7 +93,7 @@ class PollsController < ApplicationController
       if response.poll == @poll #put this logic in a validate response method?
         response.selected += 1
         response.save
-        if signed_in? 
+        if signed_in?
           current_user.responses << response 
         else
           #add cookie

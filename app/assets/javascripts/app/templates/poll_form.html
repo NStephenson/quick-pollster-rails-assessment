@@ -1,4 +1,4 @@
-<form ng-submit="vm.submitResponse(vm.response)">
+<form ng-submit="submitResponse(vm.response)">
   <div ng-repeat="response in vm.poll.responses track by response.id" ng-switch on="vm.poll.select_multiple">
 
     <input ng-switch-when="true" type="checkbox" name="{{respose.text}}" value="{{response.text}}" ng-model="vm.response.response.id[response.id]">
@@ -10,3 +10,4 @@
   
 </form>
 
+<a href="" ng-click="test()">test</a>

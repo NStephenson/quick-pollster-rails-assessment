@@ -10,13 +10,14 @@ app.directive('qpPollForm', function QpPoll(){
         ctrl.currentUser = user; 
       });
 
-      ctrl.submitResponse = function(response){
-        console.log(response);
-        PollsService.submitResults(ctrl.poll.id, response);
-      }
-
     },
     controllerAs: 'vm',
-    bindToController: {poll: '='}
+    bindToController: {poll: '='},
+    require: '^qpPollCard',
+    link: function(scope, element, attrs, ctrl){
+      scope.submitResponse = function(response) {
+        ctrl.submitResponse(response);
+      }
+    }
   }
 });

@@ -8,6 +8,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
     .state('welcome', {
       url: '/',
+      data: { authRejected: true },
       templateUrl: 'app/templates/welcome.html'
     })
     .state('welcome.newPoll', {
@@ -15,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       controller: 'PollsController as vm',
       templateUrl: 'app/templates/new_poll.html',
       resolve: {
-        polls: function(){
+        polls: function($state){
           return {};
         }
       }
@@ -34,6 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/polls',
       controller: 'PollsController as vm',
       templateUrl: 'app/templates/polls-index.html',
+      data: { authRequired: true },
       resolve: {
         polls: function(PollsService){
           return PollsService.getPolls();
@@ -53,15 +55,17 @@ app.config(function($stateProvider, $urlRouterProvider){
     .state('login',{
       url: '/login',
       controller: 'AuthController as vm',
+      data: { authRejected: true },
       templateUrl: 'app/templates/auth/login.html'
     })
     .state('signUp',{
       url: '/signup',
       controller: 'AuthController as vm',
+      data: { authRejected: true },
       templateUrl: 'app/templates/auth/registration.html'
     })
     .state('newPoll', {
-      url: '/newpoll',
+      url: '/newpolls',
       controller: "PollsController as vm",
       resolve: {
         polls: function(){
@@ -74,6 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/user/:id',
       controller: 'UsersController as ctrl',
       templateUrl: 'app/templates/user.html',
+      data: { authRequired: true },
       resolve: {
         user: function(UserService, $stateParams){
           return UserService.getUser($stateParams.id);
@@ -83,3 +88,21 @@ app.config(function($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise('/');
   });
+
+app.run(function($rootScope, $state, Auth){
+
+  $rootScope.$on('$stateChangeStart', function(e, to){
+    Auth.currentUser().then(function(user){
+      if (to.data && to.data.authRequired && !Auth.isAuthenticated()) {
+        e.preventDefault();
+        $state.go('login');
+      } else if (to.data && to.data.authRejected && Auth.isAuthenticated()) {
+        e.preventDefault();
+        $state.go('polls');
+      }
+    });
+  });
+
+});
+
+

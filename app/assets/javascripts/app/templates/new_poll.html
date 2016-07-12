@@ -1,8 +1,9 @@
+<a href="" ui-sref="welcome">test</a>
 <h1>Create a new poll:</h1>
 <form ng-submit="vm.createNewPoll()" name="newPollForm" novalidate>
 
   <label>Question:</label>
-  <input type="text" name="question" ng-model="vm.newPoll.poll.question" required="required" minlength="20">
+  <input type="text" name="question" ng-model="vm.newPoll.poll.question" required="required" minlength="5">
 
   <div ng-messages="newPollForm.question.$error" ng-if="newPollForm.question.$touched && newPollForm.question.$invalid">
     <p ng-message="required">Question is required!</p>

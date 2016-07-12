@@ -3,7 +3,7 @@ app.directive('qpPollCard', function(){
     restrict: 'E',
     templateUrl: 'app/templates/poll-card.html',
     scope: {},
-    controller: function(PollsService, Auth){
+    controller: function(PollsService, Auth, $scope){
       var ctrl = this;
 
       ctrl.isAvailable = true;
@@ -20,10 +20,6 @@ app.directive('qpPollCard', function(){
         ctrl.currentUser = user; 
         ctrl.checkResponded();
       });
-
-      if (!ctrl.poll.open) {
-        ctrl.isAvailable = false;
-      }
 
       ctrl.deletePoll = function(){
         PollsService.deletePoll(ctrl.poll);
@@ -45,6 +41,36 @@ app.directive('qpPollCard', function(){
         PollsService.editPoll(ctrl.poll.id, ctrl.poll);
         ctrl.toggleEdit();
       }
+
+      ctrl.applyResponse = function(selected){ 
+        if (typeof selected.response.id != 'string') {
+          $.each(selected.response.id, function(selectedResponseId){
+            ctrl.poll.responses.forEach(function(response){
+              if (response.id == selectedResponseId) {
+                response.selected++
+              }
+            });
+          });
+        } else {
+          ctrl.poll.responses.forEach(function(response){
+            if (response.id == selected.response.id) {
+              response.selected++
+            }
+          });
+        }
+      }
+
+      ctrl.submitResponse = function(selected){
+        ctrl.applyResponse(selected);
+        PollsService.submitResults(ctrl.poll.id, selected).then(function(a,b,c){
+          ctrl.isAvailable = false;
+        });
+      }  
+
+      ctrl.test = function(){
+        console.log();
+      }
+
     },
     controllerAs: 'vm',
     bindToController: {poll: '='}
