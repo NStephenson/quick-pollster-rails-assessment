@@ -104,16 +104,19 @@ app.run(function($rootScope, $state, Auth){
 
   $rootScope.$on('$stateChangeStart', function(e, to){
     Auth.currentUser().then(function(user){
-      if (to.data && to.data.authRequired && !Auth.isAuthenticated()) {
-        e.preventDefault();
-        $state.go('login');
-      } else if (to.data && to.data.authRejected && Auth.isAuthenticated()) {
+      if (to.data && to.data.authRejected) {
         e.preventDefault();
         $state.go('polls');
       }
+    }, function(error){
+      console.log(error);
+      if (to.data && to.data.authRequired) {
+        e.preventDefault();
+        $state.go('login');
+      }
     });
   });
-
+  
 });
 
 
