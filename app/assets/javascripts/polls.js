@@ -72,3 +72,25 @@ function addPollsToDom(){
     }
   });
 }
+
+function buildOptionsHtml(poll){
+  var optionsHtml = '<form hidden data-pollid="'+ poll.id +'" class="edit-poll" id="edit-poll-'+ poll.id +'" action="/polls/'+ poll.id +'" accept-charset="UTF-8" method="post">';
+  optionsHtml += '<input name="utf8" type="hidden" value="✓">';
+  optionsHtml += '<input type="hidden" name="_method" value="patch">';
+  optionsHtml += '<input type="hidden" name="authenticity_token" value="'+ authToken +'">';
+  optionsHtml += '<label for="poll_Allow multiple responses">Allow multiple responses?</label>';
+  optionsHtml += '<input name="poll[select_multiple]" type="hidden" value="0">';
+  optionsHtml += '<input type="checkbox" value="1" name="poll[select_multiple]" id="poll_select_multiple" '+ htmlCheckedForOption(poll.selectMultiple) +'><br>';
+  optionsHtml += '<label for="poll_Allow Poll results to be public">Allow poll results to be public?</label>';
+  optionsHtml += '<input name="poll[public_results]" type="hidden" value="0">';
+  optionsHtml += '<input type="checkbox" value="1" name="poll[public_results]" id="poll_public_results" '+ htmlCheckedForOption(poll.publicResults) +'><br>';
+  optionsHtml += '<label for="poll_Publish this poll">Publish this poll?</label>';
+  optionsHtml += '<input name="poll[published]" type="hidden" value="0">';
+  optionsHtml += '<input type="checkbox" value="1" name="poll[published]" id="poll_published" '+ htmlCheckedForOption(poll.published) +'><br>'
+  optionsHtml += '<label for="poll_Uncheck to close this poll">Uncheck to close this poll</label>';
+  optionsHtml += '<input name="poll[open]" type="hidden" value="0">';
+  optionsHtml += '<input type="checkbox" value="1" name="poll[open]" id="poll_open" '+ htmlCheckedForOption(poll.open) +'><br>';
+  optionsHtml += '<input type="submit" name="commit" value="Edit Poll Options">';
+  optionsHtml += '</form><br>';
+  return optionsHtml;
+}
