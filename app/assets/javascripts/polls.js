@@ -105,3 +105,16 @@ function loadPolls(){
 
   attachPollListeners();
 }
+
+function getCurrentUser(){
+  $.get('/current_user', function(user){
+    currentUser = user;
+  });
+}
+
+function attachPollListeners(){
+  respondToPoll();
+  editPollOptionsToggle();
+  submitPollOptionsEdit();
+  deletePoll();
+}
