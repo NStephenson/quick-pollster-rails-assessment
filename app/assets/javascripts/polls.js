@@ -237,3 +237,36 @@ function createResponses(responses){
   });
   return responseObjects;
 }
+
+
+function submitNewPoll(){
+  $('#new_poll').submit(function(e){
+    e.preventDefault();
+
+    var newPoll = {};
+    newPoll.poll = {};
+    newPoll.poll.responses_attributes = [];
+
+    newPoll.poll.question = $('#poll_question').val();
+
+    $.each($('.new-poll-responses'), function(i,response){
+      var response = {text: $(response).val()}
+      newPoll.poll.responses_attributes.push(response);
+    });
+
+    newPoll.poll.select_multiple = !!parseInt($('#poll_select_multiple:checked').val());
+    newPoll.poll.public_results = !!parseInt($('#poll_public_results:checked').val());
+    newPoll.poll.published = !!parseInt($('#poll_published:checked').val());
+
+    $.post('/polls', newPoll, function(poll){
+      var newSavedPoll = createPollObject(poll);
+      $('.new-poll-form').html(newSavedPoll.buildPollHtml())
+    }).fail(function(error){
+      });
+  });
+}
+
+$(document).ready(function(){
+  submitNewPoll();
+  addPollsToDom();
+});
