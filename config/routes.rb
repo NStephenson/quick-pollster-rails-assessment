@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :polls
 
-
+  get '/current_user', to: 'users#current'
 
 
   get 'polls/:id/results', to: 'polls#results', as: 'poll_results'

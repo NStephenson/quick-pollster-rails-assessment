@@ -1,18 +1,22 @@
-<h1>Create a new Poll</h1>
+<script type="text/javascript">submitNewPoll();</script>
 
-<%= form_for @poll do |f| %>
-  <% if flash[:error] %>
-    <%= flash[:error] %><br>
-  <% end %>
-  <%= f.label "Question:" %>
-  <%= f.text_field :question %><br>
-    <%= f.fields_for :responses do |r| %>
-      <%= r.label "Response:" %>
-      <%= r.text_field :text %><br>
+<div class="new-poll-form">
+  <h1>Create a new Poll</h1>
+
+  <%= form_for @poll do |f| %>
+    <% if flash[:error] %>
+      <%= flash[:error] %><br>
     <% end %>
+    <%= f.label "Question:" %>
+    <%= f.text_field :question %><br>
+      <%= f.fields_for :responses do |r| %>
+        <%= r.label "Response:" %>
+        <%= r.text_field :text, {class: 'new-poll-responses'} %><br>
+      <% end %>
 
-  <%= render partial: "poll_options", locals: {form: f} %>
+    <%= render partial: "poll_options", locals: {form: f} %>
 
-  <%=f.submit "Create new poll" %>
-  
-<% end %>
+    <%=f.submit "Create new poll" %>
+    
+  <% end %>
+</div>

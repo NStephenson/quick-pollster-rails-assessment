@@ -27,7 +27,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'faker'
-gem 'active_model_serializer'
+gem 'active_model_serializers'
+gem 'pry-rails'
 
 
 # Use ActiveModel has_secure_password
