@@ -45,3 +45,18 @@ class Poll {
     return pollHtml;
   }
 }
+
+class Response {
+  constructor(id, text, selected){
+    this.id = id;
+    this.text = text;
+    this.selected = selected;
+  }
+}
+
+class User {
+  constructor(id, username) {
+    this.id = id;
+    this.username = username;
+  }
+}
