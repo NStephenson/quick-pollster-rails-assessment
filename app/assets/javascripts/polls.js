@@ -94,3 +94,14 @@ function buildOptionsHtml(poll){
   optionsHtml += '</form><br>';
   return optionsHtml;
 }
+
+function loadPolls(){
+  var filteredPolls = allPolls.filter(function(poll, i){
+    return i > maxPollsInDom - 6 && i < maxPollsInDom;
+  });
+  filteredPolls.forEach(function(poll){
+    $('#polls-list').append(poll.buildPollHtml());
+  });
+
+  attachPollListeners();
+}
