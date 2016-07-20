@@ -144,3 +144,21 @@ function submitPollOptionsEdit(){
     });
   });
 }
+
+function deletePoll(){
+  $('.delete-poll').click(function(e){
+    e.preventDefault();
+    var pollId = $(this).data().pollid; 
+    $.ajax({
+      url: '/polls/' + pollId,
+      type: 'DELETE',
+      success: function(pollId){
+        removePollFromDom(pollId);
+      }
+    });
+  });
+}
+
+function removePollFromDom(pollId){
+  $('#poll_card_' + pollId).html('<p>This Poll has been deleted.</p>');
+}
