@@ -192,3 +192,17 @@ function respondToPoll(){
 
   });
 }
+
+function buildPollResponseHtml(poll){
+  var total = 0;
+  var responseHtml = '<div>';
+  responseHtml += '<ul>';
+  poll.responses.forEach(function(response){
+    total += response.selected;
+    responseHtml += '<li>' + response.text + ': ' + response.selected + '  votes'
+  });
+  responseHtml += '</ul>';
+  responseHtml += '<p>Total votes: '+ total +'</p>'
+  responseHtml += '</div>';
+  return responseHtml;
+}
