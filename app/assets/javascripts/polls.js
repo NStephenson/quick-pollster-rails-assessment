@@ -206,3 +206,20 @@ function buildPollResponseHtml(poll){
   responseHtml += '</div>';
   return responseHtml;
 }
+
+function htmlCheckedForOption(option){
+  if (option) {
+    return 'checked="checked"';
+  } 
+}
+
+function getPolls(){
+  allPolls = [];
+  $.get('/polls', function(polls){
+    polls.forEach(function(poll){
+      allPolls.push(createPollObject(poll));
+    });
+  $('#polls-list').html('');
+    loadPolls();
+  });
+}
