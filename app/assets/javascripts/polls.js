@@ -60,3 +60,15 @@ class User {
     this.username = username;
   }
 }
+
+function addPollsToDom(){
+  $('#see-more-polls').click(function(){
+    if(maxPollsInDom < allPolls.length){
+      maxPollsInDom += 5;
+      loadPolls();
+      if(maxPollsInDom >= allPolls.length){
+        $('#polls-list').append('<p>End of the Line. No More Polls.</p>');
+      }
+    }
+  });
+}
