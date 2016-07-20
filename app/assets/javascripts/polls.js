@@ -118,3 +118,29 @@ function attachPollListeners(){
   submitPollOptionsEdit();
   deletePoll();
 }
+
+function submitPollOptionsEdit(){
+  $('.edit-poll').submit(function(e){
+    e.preventDefault();
+    var pollId = $(this).data().pollid;
+    var editedPollOptions = {};
+    var poll = {};
+    poll.select_multiple = $('#edit-poll-'+ pollId +' > #poll_select_multiple').prop('checked');
+    poll.public_results = $('#edit-poll-'+ pollId +' > #poll_public_results').prop('checked');
+    poll.published = $('#edit-poll-'+ pollId +' > #poll_published').prop('checked');
+    poll.open = $('#edit-poll-'+ pollId +' > #poll_open').prop('checked');
+    editedPollOptions.poll = poll;
+
+    $.ajax({
+      url: 'polls/' + pollId,
+      data: editedPollOptions,
+      method: 'PUT',
+      success: function(poll){
+        var updatedPoll = createPollObject(poll);
+        $('#poll_card_' + poll.id ).html(updatedPoll.buildPollHtml());
+
+        attachPollListeners();
+      }
+    });
+  });
+}
