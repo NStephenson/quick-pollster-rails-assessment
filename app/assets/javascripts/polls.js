@@ -170,3 +170,25 @@ function editPollOptionsToggle(){
     $('#edit-poll-' + pollId ).toggle();
   });
 }
+
+function respondToPoll(){
+  $('.poll-form').submit(function(e){
+    e.preventDefault();
+
+    var pollId = $(this).data().pollid;
+    var response = {};
+    response.response = {};
+    response.response.id = [];
+
+    $(':checked').each(function(i,resp){
+      response.response.id.push( $(resp).val() );
+    });
+
+    $.post('/polls/' + pollId + '/results', response, function(poll){
+      $('#poll_' + pollId).html(buildPollResponseHtml(poll));  
+    }).fail(function(error, b, c){
+      alert('This didn\'t work');
+    });
+
+  });
+}
