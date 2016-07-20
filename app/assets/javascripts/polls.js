@@ -162,3 +162,11 @@ function deletePoll(){
 function removePollFromDom(pollId){
   $('#poll_card_' + pollId).html('<p>This Poll has been deleted.</p>');
 }
+
+function editPollOptionsToggle(){
+  $('.edit-poll-options').click(function(e){
+    e.preventDefault();
+    var pollId = $(this).data().pollid;
+    $('#edit-poll-' + pollId ).toggle();
+  });
+}
