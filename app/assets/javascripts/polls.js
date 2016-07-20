@@ -223,3 +223,17 @@ function getPolls(){
     loadPolls();
   });
 }
+
+function createPollObject(poll){
+  var user = new User(poll.user.id, poll.user.username);
+  var pollObject = new Poll(poll.id, poll.question, poll.published, poll.select_multiple, poll.public_results, poll.open, createResponses(poll.responses), user);
+  return pollObject;
+}
+
+function createResponses(responses){
+  var responseObjects = [];
+  responses.forEach(function(response){
+    responseObjects.push(new Response(response.id, response.text, response.selected))
+  });
+  return responseObjects;
+}
