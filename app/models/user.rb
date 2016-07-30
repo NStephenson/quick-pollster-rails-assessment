@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
   has_many :polls
   has_many :votes
   has_many :responses, through: :votes
-  has_many :surveys
 
   attr_accessor :login
 
