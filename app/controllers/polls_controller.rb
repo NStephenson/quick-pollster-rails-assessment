@@ -24,8 +24,6 @@ class PollsController < ApplicationController
     if signed_in?
       redirect_to poll_results_path(@poll) if current_user.polls_responded.include?(@poll)
     end
-
-    # redirect_to survey_path(@poll.survey) if @poll.limit_to_survey 
   end
 
   def results
