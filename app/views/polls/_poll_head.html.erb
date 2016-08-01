@@ -1,4 +1,4 @@
-<h2><%= poll.question%></h2>
+<h2><%= link_to poll.question, poll_path(poll) %></h2>
 <% if poll.user && poll.user == current_user %>
   <h5> <%= link_to 'Edit Poll Options', edit_poll_path(poll) %> - <%= link_to 'Delete this Poll', poll_path(poll), method: 'DELETE' %> - Share link: <%= poll_url(poll)%></h5>
 <% elsif poll.user && poll.user != current_user %>

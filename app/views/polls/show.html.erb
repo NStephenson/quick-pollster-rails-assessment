@@ -1,1 +1,1 @@
-<%= render partial: "poll", locals: {poll: @poll, survey: false} %>
+<%= poll_form_or_results_if_responded(poll) %>
