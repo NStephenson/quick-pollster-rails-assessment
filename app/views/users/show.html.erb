@@ -4,7 +4,7 @@
 
   <h2>Your Polls</h2>
   <% @user.polls.each do |poll| %>
-    <%= render partial: "polls/poll", locals: {poll: poll, survey: false} %>
+    <%= poll_form_or_results_if_responded(poll) %>
   <% end %>
 
   <h2>Your Votes</h2>
@@ -19,7 +19,7 @@
 
   <h2>Published Polls</h2>
   <% @user.polls.published_polls.each do |poll| %>
-    <%= render partial: "polls/poll", locals: {poll: poll, survey: false} %>
+    <%= poll_form_or_results_if_responded(poll) %>
   <% end %>
 
   <h2>Public Votes</h2>
@@ -31,4 +31,3 @@
   </ul>
 
 <% end %>
-
