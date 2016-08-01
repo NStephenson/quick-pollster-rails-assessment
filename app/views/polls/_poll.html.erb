@@ -10,9 +10,14 @@
 
   <form method="POST" action="<%= poll_add_results_path(poll)%>">
     <% poll.responses.each do |response| %>
-      <input type="<%= poll.select_multiple ? 'checkbox' : 'radio' %>" name="response[<%= poll.id %>][]" value="<%= response.id %>"><label><%= response.text %></label><br>
-      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input type="<%= poll.select_multiple ? 'checkbox' : 'radio' %>" name="response[ids][]" value="<%= response.id %>"><label><%= response.text %></label><br>
     <% end %>
+      <br>
+      <div>
+        <label>Make this response private?</label>
+        <input type="checkbox" name="response[public_response]" value="false"><br>
+      </div>
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
       <input type="submit" name="submit">
   </form>
 

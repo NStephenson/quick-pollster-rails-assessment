@@ -66,13 +66,16 @@ class PollsController < ApplicationController
   end
 
   def add_results
-    params.require('response')[params[:id]].each do |response_id|
+    response_params = params.require(:response).permit(:public_response, ids: [])
+    response_params[:ids].each do |response_id|
       response = Response.find(response_id.to_i)
       if response.poll == @poll #put this logic in a validate response method?
         response.selected += 1
         response.save
         if signed_in? 
-          current_user.responses << response 
+          vote = Vote.new(user: current_user, response: response)
+          vote.public_response = response_params[:public_response] if response_params[:public_response]
+          vote.save
         else
           #cookies[:polls_responded] = []
           #cookies[:polls_responded] << @poll.id #need working code to stop users not signed in from casting multiple votes
