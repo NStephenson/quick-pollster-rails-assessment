@@ -1,12 +1,4 @@
-<h1><%= poll.question%></h1>
-
-  <% if poll.user && poll.user == current_user %>
-    <h5> <%= link_to 'Edit Poll Options', edit_poll_path(poll) %> - <%= link_to 'Delete this Poll', poll_path(poll), method: 'DELETE' %> - Share link: <%= poll_url(poll)%></h5>
-  <% elsif poll.user && poll.user != current_user %>
-    <h5>by <%= link_to poll.user.username, user_path(poll.user) %></h5>
-  <% else %>
-    <h5>By whoever sent you this link, most likely.</h5>
-  <% end %>
+<%= render partial: 'polls/poll_head', locals: { poll: poll } %>
 
 <% if poll.public_results || current_user == poll.user %>
   <ul>

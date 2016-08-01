@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
   def polls_responded
     responses.map { |response| response.poll }.uniq
   end
+
+  def public_votes
+    votes.where(public_response: true)
+  end
   
 
 end

@@ -24,7 +24,7 @@
 
   <h2>Public Votes</h2>
    <ul>
-  <% @user.votes.public_votes.each do |vote| %>
+  <% @user.public_votes.each do |vote| %>
     <li><%= link_to vote.response.poll.question, poll_path(vote.poll) %><br>
     <%= @user.username %> responded with "<%= vote.response.text %>"</li>
   <% end %>
