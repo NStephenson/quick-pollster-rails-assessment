@@ -10,9 +10,9 @@ module PollsHelper
 
   def poll_form_or_results_if_responded(poll)
     if responded_to?(poll)
-      render partial: "poll_results", locals: {poll: poll} 
+      render partial: "polls/poll_results", locals: {poll: poll} 
     else 
-      render partial: "poll", locals: {poll: poll, survey: false} 
+      render partial: "polls/poll", locals: {poll: poll, survey: false} 
     end 
   end
 
