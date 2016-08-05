@@ -1,8 +1,15 @@
 <h1>Create a new Poll</h1>
 
 <%= form_for @poll do |f| %>
-  <% if flash[:error] %>
-    <%= flash[:error] %><br>
+  <% if @poll.errors.any? %>
+    <div id='errors'>
+      <h2><%= pluralize(@poll.errors.count, 'error') %> errors need to be fixed before we can save your Poll!</h2>
+      <ul>
+        <% @poll.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
   <%= f.label "Question:" %>
   <%= f.text_field :question %><br>
