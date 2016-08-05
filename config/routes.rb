@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   end
 
   resources :polls
+  resources :categories, only: [:new, :index, :create]
+
+  resources :polls, only: :show do
+    resources :categories, only: [:new, :index]
+  end
 
 
   get 'polls/:id/results', to: 'polls#results', as: 'poll_results'
