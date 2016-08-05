@@ -98,11 +98,18 @@ class PollsController < ApplicationController
 
   private
   def new_poll_params
-    params.require(:poll).permit(:question, :limit_to_survey, :select_multiple, :open, :public_results, :published, responses_attributes: [:id, :text])
+    params.require(:poll).permit(
+      :question, :limit_to_survey, :select_multiple, :open, 
+      :public_results, :published, responses_attributes: [:id, :text],
+      category_ids:[], categories_attributes: [:name]
+    )
   end
 
   def edit_poll_params
-    params.require(:poll).permit(:limit_to_survey, :select_multiple, :open, :public_results, :published)
+    params.require(:poll).permit(
+      :limit_to_survey, :select_multiple, :open, :public_results, :published,
+      category_ids:[], categories_attributes: [:name]
+    )
   end
 
   def find_poll
