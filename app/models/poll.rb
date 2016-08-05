@@ -12,10 +12,9 @@ class Poll < ActiveRecord::Base
   validates :question, presence: true
   validates :responses, length: {in: 2..6}
 
+  scope :published_polls, -> {where(published: true)}
 
-  def self.published_polls
-    where(published: true)
-  end
+  
 
   def vote_total
     total = 0
