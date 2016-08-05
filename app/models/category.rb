@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
 
-  belongs_to :poll
+  has_many :poll_categories
+  has_many :polls, through: :poll_categories
 
   validates :poll, presence: true
   validates :name, presence: true

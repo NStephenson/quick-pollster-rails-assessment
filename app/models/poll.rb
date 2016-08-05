@@ -3,7 +3,8 @@ class Poll < ActiveRecord::Base
   belongs_to :user
   has_many :responses
   has_many :votes, through: :responses 
-  has_one :category 
+  has_many :poll_categories
+  has_many :categories, through: :poll_categories
 
 
   accepts_nested_attributes_for :responses, reject_if: proc {|attributes| attributes['text'].blank?}
