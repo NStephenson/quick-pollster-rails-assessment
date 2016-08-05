@@ -1,5 +1,16 @@
+<h1>Create a new Category</h1>
+  <% if @category.errors.any? %>
+    <div id='errors'>
+      <h2><%= pluralize(@category.errors.count, 'error') %> errors need to be fixed before we can save your Category!</h2>
+      <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 <%= form_for @category do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name %><br>
   <%= f.submit %>
 <% end %>
