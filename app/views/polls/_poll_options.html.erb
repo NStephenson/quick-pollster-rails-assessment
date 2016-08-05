@@ -1,12 +1,22 @@
   <div id="options">
+    <h5>Select options:</h5>
     <%= form.label "Allow multiple responses?" %>
     <%= form.check_box :select_multiple %><br>
-    <%# form.label "Limit this question to a survey?" %>
-    <%# form.check_box :limit_to_survey <br> %>
+
+
     <% if signed_in? %>
         <%= form.label "Allow Poll results to be public?" %>
         <%= form.check_box :public_results %><br>
         <%= form.label "Publish this poll?" %>
         <%= form.check_box :published %><br>
+
+        <h5>Add a category:</h5>
+
+        <%= form.collection_check_boxes :category_ids, Category.all, :id, :name %><br><br>
+
+        <%= form.fields_for :categories do |c| %>
+          <%= c.label "Create a new category:" %>
+          <%= c.text_field :name %><br>
+        <% end %>
     <% end %>
   </div>

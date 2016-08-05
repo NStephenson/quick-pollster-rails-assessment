@@ -32,6 +32,7 @@ class PollsController < ApplicationController
   def new
     @poll = Poll.new
     6.times { @poll.responses.build }
+    @poll.categories.build
   end
 
   def create
