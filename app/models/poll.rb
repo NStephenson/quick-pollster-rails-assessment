@@ -14,7 +14,12 @@ class Poll < ActiveRecord::Base
 
   scope :published_polls, -> {where(published: true)}
 
-  
+  def categories_attributes=(category_attributes)
+    category_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(category_attribute)
+      self.categories << category
+    end
+  end
 
   def vote_total
     total = 0
