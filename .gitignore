@@ -17,4 +17,4 @@
 /tmp
 
 # Ignore ENV provider keys
-./env
+/.env
